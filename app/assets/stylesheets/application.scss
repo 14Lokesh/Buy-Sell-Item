@@ -1,0 +1,47 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+ @import 'bootstrap';
+ 
+ .button-design{
+    // background-image: linear-gradient(#0dccea, #0d70ea);
+    background-image: linear-gradient(#059c1c, #04764a);
+    border: 0;
+    border-radius: 4px;
+    box-shadow: rgba(0, 0, 0, .3) 0 5px 15px;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    font-family: Montserrat,sans-serif;
+    font-size: .9em;
+    margin: 5px;
+    padding: 10px 15px;
+    text-align: center;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+  
+  }
+.card{
+  max-width: 300px; /* Adjust the value to your desired width */
+    margin: 0 auto;
+}
+.abc {
+  transform: translateX(-90%);
+}
+.notifications-list {
+  word-wrap: break-word;
+  max-width: 400px; /* Adjust this value to your desired width */
+}

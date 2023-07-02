@@ -1,0 +1,84 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <h1 class="text-center">Sign up</h1>
+
+      <%= form_with model: @user, url: users_path, class: "my-form" do |form| %>
+        <div class="form-group">
+          <%= form.label :username %>
+          <%= form.text_field :username, class: "form-control", placeholder: "Enter Your Name" %>
+         
+        </div>
+
+        <div class="form-group">
+          <%= form.label :email %>
+          <%= form.email_field :email, class: "form-control", placeholder: "Enter Your Email"%>
+         
+        </div>
+
+        <div class="form-group">
+          <%= form.label :password %>
+          <%= form.password_field :password, class: "form-control", placeholder: "Enter Your Password"%>
+        
+        </div>
+
+        <div class="form-group">
+          <%= form.label :password_confirmation %>
+          <%= form.password_field :password_confirmation, class: "form-control", placeholder: "Confirm Your Password"%>
+        
+        </div>
+
+      
+        <%= form.submit "Sign Up", class: " mt-3 button-design form-control" %>
+      
+      <% end %>
+
+      <div class="text-center">
+      <%= button_to 'Sign up with Google', '/auth/google_oauth2', class: "btn btn-outline-danger btn-block mt-3 form-control" %>
+      <%= button_to 'Sign up with Facebook', '/auth/facebook', class: "btn btn-outline-primary btn-block mt-3 form-control" %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<%# <h1> Sign up </h1> %>
+
+
+<%# <%= form_with model: @user, url: signup_path do |form| %> 
+    <%# <%= form.label :"Name" %> 
+    <%# <%= form.text_field :username,  placeholder:"Enter Your Name" %> 
+
+    <%# <%= form.label :"Email Address" %> 
+    <%# <%= form.email_field :email ,  placeholder:"Enter Your Email"%> 
+  
+    <%# <%= form.label :"Password" %> 
+    <%# <%= form.password_field :password , placeholder:"Enter Your Password"%> 
+
+    <%# <%= form.label :"Confirm Password" %> 
+    <%# <%= form.password_field :password_confirmation, placeholder:"Confirm Your Password" %> 
+  
+
+  <%# <%= form.submit "Sign Up"%> 
+<%# <%end%> 
+
+<%# <%= button_to 'Sign up withgoogle' , '/auth/google_oauth2' %> 
+<%# <%= button_to ' Sign up with facebook' , '/auth/facebook' %> 
+<%# if !Current.user %>
+<%#= link_to "ALready an user? Login", login_path %>
+<%# end %>
+<%# </div> %>
+
+

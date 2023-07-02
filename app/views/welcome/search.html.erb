@@ -1,0 +1,61 @@
+<% if Current.user%>
+<div class="container">
+<h4> Search Our Product </h4>
+<%= form_for :search_items, url: search_items_path, method: :get do |form| %>
+
+  <%= form.text_field :query, value: params[:search_items].presence && params[:search_items][:query] , placeholder: "Search Field"%>
+
+  <%#= form.label :query, "Filter" %>
+  <%= form.text_field :city, value: params[:search_items].presence && params[:search_items][:city], placeholder: "Filter on location" %>
+  <%= submit_tag 'Search' %>
+<% end %>
+</div>
+<%end%>
+
+
+<% unless @items.nil? %>
+  <% if params[:search_items].present? && @items.empty? %>
+    <h2>No items found matching your query.</h2>
+  <% elsif @items.present? %>
+    
+
+    <h2 class="text-center mb-4 mt-4">Item in Stock . Visit Buy page to buy the product</h2>
+<div class="container-fluid">
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
+    <% @items.each do |data| %>
+     
+        <div class="col mb-4">
+          <div class="card" style="width: 18rem;">
+                  <% @items_with_photos.each do |item_with_photos| %>
+  <div>
+    <% item_with_photos[:photo_urls].each do |photo_url| %>
+      <%= image_tag photo_url, alt: item_with_photos[:item].title, class: "card-img-top"%>
+    <% end %>
+    <!-- Other item details -->
+  </div>
+  <% break %> <!-- Add this line to break the loop after the first iteration -->
+<% end %>
+
+            
+           
+
+            <div class="card-body"> 
+              <h5 class="card-title"><%= data.title %></h5>
+              <h5 class="card-title"><%= data.city %></h5>
+              <h5 class="card-title"><%= data.username %></h5>
+              <h1> hello </h1>
+             <%= link_to 'Go to buy page', approved_ad_path, class: 'nav-link' %>
+              <%= link_to "Interested", product_path(data), class: "btn btn-primary button-design" %>
+
+            </div>
+
+          </div>
+        </div>
+     
+    <% end %>
+  </div>
+</div>
+
+   
+  <% end %>
+<% end %>

@@ -1,0 +1,37 @@
+
+
+
+
+<div class="container">
+  <div id="messages">
+    <h1 class="text-center">Conversation with <%= @conversation.opposed_user(current_user).email %></h1>
+
+    <% @conversation.messages.each do |message| %>
+      <div class="message">
+        <p><strong><%= message.sender.email %>:</strong> <%= message.body %></p>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="chat-input">
+    <%= form_with(model: [@conversation, @message], url: conversation_messages_path(@conversation), remote: true, id: 'form') do |form| %>
+      <div class="input-group">
+       <%= form.text_field :body, class: ' form-control-sm', id: 'chat_message', placeholder: 'Type your message...' %>
+        <div class="input-group-append">
+          <%= form.submit "Send", class: 'button-design',id: 'message_submit' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<div id="conversation" data-conversation-id="<%= @conversation.id %>">
+  <!-- Conversation content -->
+</div>
+
+
+
+
+<script>
+ 
+</script>

@@ -1,0 +1,15 @@
+<h1> welcome admin </h1>
+
+<div id="noti">
+    
+</div>
+
+  <% @notifications.each do |notification| %>
+    <div class="notification">
+      <%= notification.message %>
+    </div>
+  <% end %>
+
+
+
+
