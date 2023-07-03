@@ -17,7 +17,7 @@
         
             
         <li class="nav-item">
-          <%= link_to 'Products', approved_ad_path, class: 'nav-link' %>
+          <%= link_to 'Products', items_path, class: 'nav-link' %>
         </li>
 
         <% if Current.user %>
@@ -26,18 +26,20 @@
             <%= link_to 'Sell', new_item_path, class: 'nav-link' %>
           </li>
 
+          <li class="nav-item">
+              <%= link_to "Chats", conversations_path, class: "nav-link " %>
+            </li>
+
           <% if Current.user.admin %>
             <li class="nav-item">
               <%= link_to "Add Category", new_category_path, class: "nav-link" %>
             </li>
 
             <li class="nav-item">
-              <%= link_to "Pending Post", admin_approval_path, class: "nav-link" %>
+              <%= link_to "Pending Post", admin_index_path, class: "nav-link" %>
             </li>
 
-            <li class="nav-item">
-              <%= link_to "Chats", conversations_path, class: "nav-link " %>
-            </li>
+            
           <% end %>
 
           <li class="nav-item">
@@ -141,15 +143,6 @@
   });
 </script>
 
-<style>
-  .notification-item {
-    border: 1px solid #ccc;
-    padding: 10px;
-    margin-bottom: 10px;
-  }
-  .notification-item:last-child {
-    margin-bottom: 0;
-  }
 
 
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_07_02_115247) do
+ActiveRecord::Schema.define(version: 2023_07_03_100233) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 2023_07_02_115247) do
   end
 
   create_table "categories", force: :cascade do |t|
-    t.string "category"
+    t.string "category", limit: 20, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -57,11 +57,11 @@ ActiveRecord::Schema.define(version: 2023_07_02_115247) do
   end
 
   create_table "items", force: :cascade do |t|
-    t.string "title"
-    t.string "description"
-    t.string "username"
-    t.string "phone"
-    t.string "city"
+    t.string "title", limit: 30, null: false
+    t.string "description", limit: 100, null: false
+    t.string "username", null: false
+    t.string "phone", null: false
+    t.string "city", null: false
     t.json "images"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -77,7 +77,7 @@ ActiveRecord::Schema.define(version: 2023_07_02_115247) do
     t.integer "conversation_id"
     t.integer "sender_id"
     t.integer "recipient_id"
-    t.text "body"
+    t.text "body", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -103,14 +103,15 @@ ActiveRecord::Schema.define(version: 2023_07_02_115247) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "username"
-    t.string "email"
-    t.string "password_digest"
+    t.string "username", limit: 30, null: false
+    t.string "email", limit: 50, null: false
+    t.string "password_digest", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "uid"
     t.string "provider"
     t.boolean "admin", default: false
+    t.index ["email"], name: "index_users_on_email", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

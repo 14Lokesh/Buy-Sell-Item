@@ -1,45 +1,20 @@
-  <style>
 
 
-
-.flash-message {
-  position: fixed;
-  top: 0; /* Position the message at the top */
-  left: 50%; /* Position the message 50% from the left */
-  transform: translateX(-50%); /* Center the message horizontally */
-  width: 400px; /* Set the desired width */
-  /* background-color: white; */
-  padding: 20px;
-  border-radius: 5px;
-  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
-}
-
-
-
-
-  </style>
-
-  <!-- Your navbar and other content here -->
-  
-  <!-- Flash Modal -->
 <% if flash.notice %>
   <div class="modal flash-modal" id="flashModal" tabindex="-1" role="dialog" aria-labelledby="flashModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
-      <%# <div class="modal-content"> %>
-        <%# <div class="modal-body"> %>
           <div class="alert alert-success flash-message">
             <%= flash.notice %>
-          <%# </div> %>
-        <%# </div> %>
       </div>
     </div>
   </div>
+  
   <script>
     $(document).ready(function() {
       $('#flashModal').modal('show');
       setTimeout(function() {
         $('#flashModal').modal('hide');
-      }, 1000);
+      }, 10000);
     });
   </script>
 <% end %>

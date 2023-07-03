@@ -45,3 +45,70 @@
   word-wrap: break-word;
   max-width: 400px; /* Adjust this value to your desired width */
 }
+.custom-carousel {
+  max-width: 500px; /* Adjust the width as per your preference */
+  margin: 0 auto;
+}
+.item-info {
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 5px;
+  margin-top: 20px;
+}
+
+.item-info ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.item-info li {
+  margin-bottom: 10px;
+}
+
+.item-info strong {
+  font-weight: bold;
+}
+.flash-message {
+  position: fixed;
+  top: 0; /* Position the message at the top */
+  left: 50%; /* Position the message 50% from the left */
+  transform: translateX(-50%); /* Center the message horizontally */
+  width: 400px; /* Set the desired width */
+  /* background-color: white; */
+  padding: 20px;
+  border-radius: 5px;
+  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
+}
+.notification-item {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+.notification-item:last-child {
+  margin-bottom: 0;
+}
+.centered-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 85vh;
+  background-color: #f2f2f2;
+}
+
+.centered-heading {
+  text-align: center;
+  padding: 10px;
+  border-radius: 10px;
+}
+.centered-heading {
+  text-align: center;
+  background-color: #f2f2f2;
+  padding: 20px;
+  border-radius: 10px;
+}
+.footer {
+  background-color: white;
+  padding: 10px;
+  text-align: center;
+}

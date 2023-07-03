@@ -1,15 +1,35 @@
-<h1> welcome admin </h1>
-
-<div id="noti">
-    
+<h2 class="text-center mb-4 mt-4">Hello Admin, Approve these post or reject </h2> 
+<div class="container-fluid">
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
+    <% @fetched_data.each do |data| %>
+      <% if data.approved == false %>
+        <div class="col mb-4">
+          <div class="card my-card">
+            <% if data.images.attached? %>
+              <% data.images.each do |image| %>
+                <%= image_tag image, class: "card-img-top", style: "display: block" %>
+              <% end %>
+            <% else %>
+              <div class="card-body">
+                <p class="card-text">No image available.</p>
+              </div>
+            <% end %>
+            
+            <div class="card-body">
+              <h5 class="card-title"><strong>Ad Title:</strong> <%= data.title %></h5>
+              <p class="card-text"><strong>Ad Description:</strong> <%= data.description %></p>
+              <p class="card-text"><strong>Seller name:</strong> <%= data.username %></p>
+              <p class="card-text"><strong>Phone:</strong> <%= data.phone %></p>
+              <p class="card-text"><strong>City:</strong> <%= data.city %></p>
+              <p class="card-text"><strong>Category:</strong> <%= data.category.category %></p>
+            </div>
+            <div class="d-flex justify-content-between card-body">
+              <%= button_to "Approve", submit_path(data), method: :post, class: "btn btn-primary" %>
+              <%= button_to "Reject", admin_path(data), method: :delete, class: "btn btn-danger" %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
 </div>
-
-  <% @notifications.each do |notification| %>
-    <div class="notification">
-      <%= notification.message %>
-    </div>
-  <% end %>
-
-
-
-

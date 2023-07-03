@@ -44,8 +44,9 @@
               <h5 class="card-title"><%= data.city %></h5>
               <h5 class="card-title"><%= data.username %></h5>
               <h1> hello </h1>
-             <%= link_to 'Go to buy page', approved_ad_path, class: 'nav-link' %>
-              <%= link_to "Interested", product_path(data), class: "btn btn-primary button-design" %>
+             <%= link_to 'Go to buy page', items_path, class: 'nav-link' %>
+             <%= button_to "Send Mail ", send_mail_path(data.id), class: "btn btn-primary button-design" %>
+             <%= button_to 'Interested for notification', interested_path(data.id), method: :post %>
 
             </div>
 
