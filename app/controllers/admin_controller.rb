@@ -14,7 +14,9 @@ class AdminController < ApplicationController
   def approved
     @item = Item.find(params[:id])
     @admin = current_admin
-    @item.approve!(@admin)
+    @item.approved_by_id = @admin.id
+    @item.approved = true
+    @item.save
     redirect_to root_path, notice: 'Approved Successfully'
   end
 

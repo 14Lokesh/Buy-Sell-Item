@@ -15,15 +15,10 @@
               <p class="card-text"><%= data.description %></p>
               <p><strong>Category:</strong> <%= data.category.category %></p>
               <p><strong>City:</strong> <%= data.city%></p>
-
              <div class="text-center">
-              <%#= link_to "Interested", product_path(data), class: "btn btn-primary button-design" %>
-              <%= button_to "Send Mail ", send_mail_path(data), class: "btn btn-primary button-design" %>
-             <%= button_to 'Interested for notification', interested_path(data), method: :post %>
+             <%= button_to 'Interested', interested_path(data), method: :post, class: "button-design" %>
             </div>
             </div>
-              
-    
           </div>
         </div>
       <% end %>

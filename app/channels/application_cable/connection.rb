@@ -1,4 +1,8 @@
+# frozen_string_literal: true
+
+# This is a sample class representing an Admin controller.
 module ApplicationCable
+  # This is a sample class representing an Connection .
   class Connection < ActionCable::Connection::Base
     identified_by :current_user
 

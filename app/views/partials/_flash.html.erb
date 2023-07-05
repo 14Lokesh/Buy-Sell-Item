@@ -1,5 +1,3 @@
-
-
 <% if flash.notice %>
   <div class="modal flash-modal" id="flashModal" tabindex="-1" role="dialog" aria-labelledby="flashModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -8,13 +6,5 @@
       </div>
     </div>
   </div>
-  
-  <script>
-    $(document).ready(function() {
-      $('#flashModal').modal('show');
-      setTimeout(function() {
-        $('#flashModal').modal('hide');
-      }, 10000);
-    });
-  </script>
 <% end %>
+<%=javascript_pack_tag 'custom' %>

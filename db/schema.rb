@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_07_03_100233) do
+ActiveRecord::Schema.define(version: 2023_07_05_074423) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,10 +66,9 @@ ActiveRecord::Schema.define(version: 2023_07_03_100233) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "approved", default: false
-    t.bigint "user_id"
-    t.bigint "approved_by_id"
     t.integer "category_id"
-    t.index ["approved_by_id"], name: "index_items_on_approved_by_id"
+    t.integer "approved_by_id"
+    t.bigint "user_id"
     t.index ["user_id"], name: "index_items_on_user_id"
   end
 
@@ -117,7 +116,6 @@ ActiveRecord::Schema.define(version: 2023_07_03_100233) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "items", "users"
-  add_foreign_key "items", "users", column: "approved_by_id"
   add_foreign_key "notifications", "users"
   add_foreign_key "reviews", "items"
   add_foreign_key "reviews", "users"

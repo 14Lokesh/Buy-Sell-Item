@@ -5,16 +5,13 @@
       <% if data.approved == false %>
         <div class="col mb-4">
           <div class="card my-card">
-            <% if data.images.attached? %>
-              <% data.images.each do |image| %>
-                <%= image_tag image, class: "card-img-top", style: "display: block" %>
-              <% end %>
+            <% if data.images.attached? %> 
+                <%= image_tag data.images.first, class: "card-img-top", style: "display: block" %>
             <% else %>
               <div class="card-body">
                 <p class="card-text">No image available.</p>
               </div>
             <% end %>
-            
             <div class="card-body">
               <h5 class="card-title"><strong>Ad Title:</strong> <%= data.title %></h5>
               <p class="card-text"><strong>Ad Description:</strong> <%= data.description %></p>

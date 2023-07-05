@@ -1,14 +1,12 @@
 <div class="container">
   <div id="messages">
-    <h1 class="text-center">Conversation with <%= @conversation.opposed_user(current_user).email %></h1>
-
+    <h1 class="text-center">Chat with <%= @conversation.opposed_user(current_user).email %></h1>
     <% @conversation.messages.each do |message| %>
       <div class="message">
         <p><strong><%= message.sender.email %>:</strong> <%= message.body %></p>
       </div>
     <% end %>
   </div>
-
   <div class="chat-input">
     <%= form_with(model: [@conversation, @message], url: conversation_messages_path(@conversation), remote: true, id: 'form') do |form| %>
       <div class="input-group">

@@ -6,10 +6,10 @@ class Item < ApplicationRecord
   belongs_to :user
   has_many :reviews, dependent: :destroy
   has_many_attached :images, dependent: :destroy
-  validates :title, length: { maximum: 30 }
-  validates :description, length: { maximum: 100 }
-  validates :phone, presence: true, numericality: { only_integer: true, message: "must be a valid phone number" },
-                                                 length: { is: 10, message: "must be 10 digits" } 
+  validates :title, length: { maximum: 30 }, presence: true
+  validates :description, length: { maximum: 100 }, presence: true
+  validates :phone, presence: true, numericality: { only_integer: true, message: 'must be a valid phone number' },
+                                                 length: { is: 10, message: 'must be 10 digits' } 
   validates :username, :city, presence: true
   include Elasticsearch::Model
   include Elasticsearch::Model::Callbacks
@@ -18,20 +18,25 @@ class Item < ApplicationRecord
       indexes :title, type: :text, analyzer: :english
       indexes :city, type: :text, analyzer: :english
       indexes :description, type: :text, analyzer: :english
-      indexes :approved, type: :boolean, analyzer: :english
+      indexes :approved, analyzer: :english
       indexes :username, type: :text, analyzer: :english
       indexes :category, type: :keyword
     end
   end
+  # def self.index_data
+  #   __elasticsearch__.create_index! force: true
+  #   __elasticsearch__.import
+  # end
+  # index_data
 
   def as_indexed_json(_options = {})
     {
-      id:,
-      title:,
-      city:,
-      description:,
-      approved:,
-      username:,
+      id: id,
+      title: title,
+      city: city,
+      description: description,
+      approved: approved,
+      username: username,
       category: category.category
     }
   end
@@ -74,9 +79,4 @@ class Item < ApplicationRecord
     search_definition
   end
 
-  def approve!(admin)
-    self.approved_by_id = admin.id
-    self.approved = true
-    save
-  end
 end

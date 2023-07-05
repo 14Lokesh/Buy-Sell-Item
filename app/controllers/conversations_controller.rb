@@ -10,7 +10,7 @@ class ConversationsController < ApplicationController
 
   def create
     recipients = User.find(params[:conversation][:recipient_id])
-    conversation = Conversation.between(current_user, recipient).first
+    conversation = Conversation.between(current_user, recipients).first
     conversation ||= Conversation.create(sender: current_user, recipient: recipients)
     redirect_to conversation
   end
@@ -22,10 +22,23 @@ class ConversationsController < ApplicationController
 
   private
 
+  # def restrict_user
+  #   @user = Conversation.find(params[:id])
+  #   if @user.sender_id != current_user.id && @user.recipient_id != current_user.id
+  #   redirect_to root_path, notice: 'you are authorized not for this conversation'
+  #   end
+  # end
   def restrict_user
     @user = Conversation.find(params[:id])
-    if @user.sender_id != current_user.id && @user.recipient_id != current_user.id
-      redirect_to root_path, notice: 'you are not for this conversation'
-    end
+    redirect_unauthorized unless authorized_user?
   end
+
+  def authorized_user?
+    @user.sender_id == current_user.id || @user.recipient_id == current_user.id
+  end
+
+  def redirect_unauthorized
+    redirect_to root_path, notice: 'You are not authorized for this conversation'
+  end
+
 end

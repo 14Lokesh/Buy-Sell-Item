@@ -25,12 +25,17 @@ class SessionsController < ApplicationController
   end
 
   def omniauth
-    user = find_or_create_user_from_omniauth
+    user = User.find_or_create_by(uid: request.env['omniauth.auth'][:uid], provider: request.env['omniauth.auth'][:provider]) do |u|
+      u.username= request.env['omniauth.auth'][:info][:first_name]
+      u.email = request.env['omniauth.auth'][:info][:email]
+      u.password = SecureRandom.hex(15)
+    end
     if user.valid?
-      log_in_user(user)
-      redirect_to root_path
-    else
-      redirect_to new_session_path
+      session[:user_id] = user.id
+      cookies.signed[:user_id] = user.id
+       redirect_to root_path
+     else
+       redirect_to new_session_path
     end
   end
 
@@ -41,14 +46,6 @@ class SessionsController < ApplicationController
     user_email = auth['info']['email']
     user = User.find_by(uid: u_id)
     redirect_to_existing_user_or_create_new(user, u_id, user_name, user_email)
-  end
-
-  def mail_to_seller
-    item = Item.find(params[:id])
-    interested_user = current_user
-    creator_email = item.user.email
-    AdminMailer.interested_email(creator_email, interested_user.username, interested_user.email).deliver_now
-    redirect_to product_path
   end
 
   private

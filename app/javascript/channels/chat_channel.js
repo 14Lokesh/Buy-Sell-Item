@@ -1,12 +1,9 @@
 import consumer from '../channels/consumer'
-console.log('hi')
 document.addEventListener('turbolinks:load', () => {
-  console.log('hii')
   const conversationId = document.getElementById('conversation').dataset.conversationId;
   const messageInput = document.getElementById('message_body');
   const messagesContainer = document.getElementById('messages');
   const messageForm=document.getElementById('form')
-
   if (messageForm) {
     console.log('form')
     messageForm.addEventListener('submit', (event) => {
@@ -39,6 +36,7 @@ document.addEventListener('turbolinks:load', () => {
           console.log("Connected to server")
         },
         received: function (data) {
+          console.log(data)
           messagesContainer.insertAdjacentHTML('beforeend', `<p><strong>${data.sender}</strong>: ${data.message}</p>`);
           const messageInput = document.querySelector("#chat_message")
           messageInput.value = ""

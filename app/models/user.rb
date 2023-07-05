@@ -13,7 +13,7 @@ class User < ApplicationRecord
   has_many :received_conversations, class_name: 'Conversation', foreign_key: 'recipient_id'
   validates :username, presence: true, length: { maximum: 30 }
   validates :email, presence: true, length: { maximum: 100 },
-                    format: { with: VALID_EMAIL_REGEX, message: "must be a valid email address" },
+                    format: { with: VALID_EMAIL_REGEX, message: 'must be a valid email address' },
                     uniqueness: { case_sensitive: false }
   validates :password_digest, presence: true
 end

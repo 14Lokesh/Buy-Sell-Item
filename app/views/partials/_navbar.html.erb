@@ -82,7 +82,7 @@
   </div>
 
   <!-- Notification Modal -->
-  <div class="modal fade" id="notificationModal" tabindex="-1" role="dialog" aria-labelledby="notificationModalLabel" aria-hidden="true">
+   <div class="modal fade" id="notificationModal" tabindex="-1" role="dialog" aria-labelledby="notificationModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-top-right" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -134,14 +134,8 @@
   </div>
   <%end%>
 </nav>
+<%=javascript_pack_tag 'custom' %>
 
-<script>
-  $(document).ready(function() {
-    $('#mark-read-button').click(function() {
-      $('.notification-item').remove();
-    });
-  });
-</script>
 
 
 
