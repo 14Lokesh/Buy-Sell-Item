@@ -12,12 +12,11 @@
   </div>
 <% end %>
 
-
 <% unless @items.nil? %>
   <% if params[:search_items].present? && @items.empty? %>
-    <h2>No items found matching your query.</h2>
+    <h2 class="text-center">No items found matching your query.</h2>
   <% elsif @items.present? %>
-    <h2 class="text-center mb-4 mt-4">Item in Stock. Visit Buy page to buy the product</h2>
+    <h2 class="text-center mb-4 mt-4">Items in Stock. Visit the Buy page to buy the product.</h2>
     <div class="container-fluid">
       <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
         <% @items.each do |data| %>
@@ -31,15 +30,13 @@
                 </div>
                 <% break %> 
               <% end %>
-            
               <div class="card-body"> 
                 <h5 class="card-title"><%= data.title %></h5>
-                <h5 class="card-title"><%= data.city %></h5>
-                <h5 class="card-title"><%= data.username %></h5>
-                <h1>hello</h1>
-                <%= link_to 'Go to buy page', items_path, class: 'nav-link' %>
-               <div class="text-center">
-                  <%= button_to 'Interested', interested_path(data), method: :post, class: "button-design" %>
+                <p class="card-text"><%= data.description %></p>
+                <p><strong>Category:</strong> <%= data.category%></p>
+                <p><strong>City:</strong> <%= data.city %></p>
+                <div class="text-center">
+                  <%= button_to 'Interested', interested_path(data.id), method: :post, class: "btn btn-primary button-design" %>
                 </div>
               </div>
             </div>

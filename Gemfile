@@ -23,22 +23,23 @@ gem 'jbuilder', '~> 2.7'
 # gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password
 
-gem 'bcrypt', '~> 3.1.7'
-gem "dotenv-rails"
-gem "omniauth"
-gem "omniauth-google-oauth2"
-gem "omniauth-rails_csrf_protection"
-gem "omniauth-facebook"
-gem 'koala'
-gem 'pry'
 gem 'actioncable'
-gem 'redis', '~> 4.2'
-gem 'jquery-rails'
+gem 'bcrypt', '~> 3.1.7'
+gem 'dotenv-rails'
 gem 'elasticsearch', '~>7.17.7'
 gem 'elasticsearch-model'
 gem 'elasticsearch-rails'
- gem 'rspec-rails', '~> 4.0'
- gem 'factory_bot_rails', '~> 6.0'
+gem 'koala'
+gem 'omniauth'
+gem 'omniauth-google-oauth2'
+gem 'omniauth-rails_csrf_protection'
+gem 'omniauth-facebook'
+gem 'rspec-rails', '~> 4.0'
+
+gem 'pry'
+gem 'redis', '~> 4.2'
+gem 'jquery-rails'
+gem 'factory_bot_rails', '~> 6.0'
 
 
 

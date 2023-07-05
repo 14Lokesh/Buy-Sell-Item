@@ -9,7 +9,7 @@ class Item < ApplicationRecord
   validates :title, length: { maximum: 30 }, presence: true
   validates :description, length: { maximum: 100 }, presence: true
   validates :phone, presence: true, numericality: { only_integer: true, message: 'must be a valid phone number' },
-                                                 length: { is: 10, message: 'must be 10 digits' } 
+                    length: { is: 10, message: 'must be 10 digits' }
   validates :username, :city, presence: true
   include Elasticsearch::Model
   include Elasticsearch::Model::Callbacks
@@ -27,7 +27,6 @@ class Item < ApplicationRecord
   #   __elasticsearch__.create_index! force: true
   #   __elasticsearch__.import
   # end
-  # index_data
 
   def as_indexed_json(_options = {})
     {
@@ -78,5 +77,5 @@ class Item < ApplicationRecord
 
     search_definition
   end
-
+  # index_data
 end

@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :review do
-    content { 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' }
+    content { 'just checking the content file' }
     rating { 4 }
     association :user
     association :item

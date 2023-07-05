@@ -1,23 +1,23 @@
 <h2 class="text-center mb-4 mt-4">Approved Ads: All the sell items will show here</h2>
 <div class="container-fluid">
   <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
-    <% @item.each do |data| %>
-      <% if data.approved %>
+    <% @item.each do |item| %>
+      <% if item.approved %>
         <div class="col mb-4">
           <div class="card" style="width: 18rem;">
-            <% if data.images.attached? %>
-              <%= image_tag data.images.first, class: "card-img-top" %>
+            <% if item.images.attached? %>
+              <%= image_tag url_for(item.images.first), class: "card-img-top" %>
             <% else %>
-              <p>No image available.</p>
+              <p class="text-center">No image available.</p>
             <% end %>
             <div class="card-body"> 
-              <h5 class="card-title"><%= data.title %></h5>
-              <p class="card-text"><%= data.description %></p>
-              <p><strong>Category:</strong> <%= data.category.category %></p>
-              <p><strong>City:</strong> <%= data.city%></p>
-             <div class="text-center">
-             <%= button_to 'Interested', interested_path(data), method: :post, class: "button-design" %>
-            </div>
+              <h5 class="card-title"><%= item.title %></h5>
+              <p class="card-text"><%= item.description %></p>
+              <p><strong>Category:</strong> <%= item.category.category %></p>
+              <p><strong>City:</strong> <%= item.city %></p>
+              <div class="text-center">
+                <%= button_to 'Interested', interested_path(item), method: :post, class: "btn btn-primary button-design" %>
+              </div>
             </div>
           </div>
         </div>

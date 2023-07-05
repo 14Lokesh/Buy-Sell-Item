@@ -7,7 +7,7 @@
     <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
       <ul class="navbar-nav">
         <% if !Current.user %>
-          <li cField Searchlass="nav-item">
+          <li class="nav-item">
             <%= link_to 'Signup', new_user_path, class: 'nav-link' %>
           </li>
           <li class="nav-item">
@@ -15,7 +15,6 @@
           </li>
         <% end %>
         
-            
         <li class="nav-item">
           <%= link_to 'Products', items_path, class: 'nav-link' %>
         </li>
@@ -27,8 +26,8 @@
           </li>
 
           <li class="nav-item">
-              <%= link_to "Chats", conversations_path, class: "nav-link " %>
-            </li>
+            <%= link_to "Chats", conversations_path, class: "nav-link" %>
+          </li>
 
           <% if Current.user.admin %>
             <li class="nav-item">
@@ -38,23 +37,20 @@
             <li class="nav-item">
               <%= link_to "Pending Post", admin_index_path, class: "nav-link" %>
             </li>
-
-            
           <% end %>
 
           <li class="nav-item">
-  <div class="d-flex align-items-center">
-    <%= form_for :search_items, url: search_items_path, method: :get, html: { class: "form-inline" } do |form| %>
-      <div class="input-group">
-        <%= form.text_field :query, value: params[:search_items].presence && params[:search_items][:query], placeholder: "Search Field", class: "form-control" %>
-        <div class="input-group-append">
-          <%= submit_tag 'Search', class: "btn btn-outline-success" %>
-        </div>
-      </div>
-    <% end %>
-  </div>
-</li>
-
+            <div class="d-flex align-items-center">
+              <%= form_for :search_items, url: search_items_path, method: :get, html: { class: "form-inline" } do |form| %>
+                <div class="input-group">
+                  <%= form.text_field :query, value: params[:search_items].presence && params[:search_items][:query], placeholder: "Search Field", class: "form-control" %>
+                  <div class="input-group-append">
+                    <%= submit_tag 'Search', class: "btn btn-outline-success" %>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          </li>
 
           <li class="nav-item">
             <span class="nav-link">Welcome: <%= Current.user.email %></span>
@@ -81,8 +77,8 @@
     </div>
   </div>
 
-  <!-- Notification Modal -->
-   <div class="modal fade" id="notificationModal" tabindex="-1" role="dialog" aria-labelledby="notificationModalLabel" aria-hidden="true">
+  
+  <div class="modal fade" id="notificationModal" tabindex="-1" role="dialog" aria-labelledby="notificationModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-top-right" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -95,9 +91,9 @@
           <% if current_user %>
             <%= button_to "Mark All as Read", notifications_mark_read_path, method: :post, class: "btn btn-primary", id: "mark-read-button" %>
             <div id="notifications-container">
-            <% current_user.notifications.where(read: false).each do |notification| %>
-              <div class="notification-item"><%= notification.message %></div>
-            <% end %>
+              <% current_user.notifications.where(read: false).each do |notification| %>
+                <div class="notification-item"><%= notification.message %></div>
+              <% end %>
             </div>
           <% end %>
         </div>
@@ -105,41 +101,36 @@
     </div>
   </div>
 
-  <!-- Settings Modal -->
-  <% if Current.user%>
-  <div class="modal fade" id="settingsModal" tabindex="-1" role="dialog" aria-labelledby="settingsModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-top-right" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="settingsModalLabel">Settings</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <ul class="list-group">
-            <li class="list-group-item">
-              <%= link_to "Change Email", edit_user_path(current_user), class: "btn btn-link text-decoration-none text-reset" %>
-            </li>
-            <li class="list-group-item">
-              <%= link_to "Change Password", edit_password_path(current_user), class: "btn btn-link text-decoration-none text-reset" %>
-            </li>
-            <li class="list-group-item">
-              <%= link_to "Logout", session_path(current_user), method: :delete, class: "btn btn-link text-decoration-none text-reset" %>
-            </li>
-          </ul>
+  
+  <% if Current.user %>
+    <div class="modal fade" id="settingsModal" tabindex="-1" role="dialog" aria-labelledby="settingsModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-top-right" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="settingsModalLabel">Settings</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <ul class="list-group">
+              <li class="list-group-item">
+                <%= link_to "Profile", profile_path, class: "btn btn-link text-decoration-none text-reset" %>
+              </li>
+              <li class="list-group-item">
+                <%= link_to "Change Email", edit_user_path(current_user), class: "btn btn-link text-decoration-none text-reset" %>
+              </li>
+              <li class="list-group-item">
+                <%= link_to "Change Password", edit_password_path(current_user), class: "btn btn-link text-decoration-none text-reset" %>
+              </li>
+              <li class="list-group-item">
+                <%= link_to "Logout", session_path(current_user), method: :delete, class: "btn btn-link text-decoration-none text-reset" %>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <%end%>
+  <% end %>
 </nav>
-<%=javascript_pack_tag 'custom' %>
-
-
-
-
-
-
-
-
+  <%=javascript_pack_tag 'custom' %>
