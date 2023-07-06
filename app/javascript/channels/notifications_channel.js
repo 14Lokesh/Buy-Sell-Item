@@ -15,6 +15,9 @@ consumer.subscriptions.create({channel: "NotificationsChannel"}, {
     notificationItem.classList.add("notification-item");
     notificationItem.textContent = data.notification['message'];
     notificationsContainer.appendChild(notificationItem);
-
+    var counterElement = document.getElementById('notificationCounter')
+    var counter = parseInt(counterElement.textContent)
+    counter +=1
+    counterElement.textContent = counter;
   }
 });

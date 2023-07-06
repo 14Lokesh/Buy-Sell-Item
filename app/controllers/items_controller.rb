@@ -38,6 +38,7 @@ class ItemsController < ApplicationController
       end
     end.compact
   end
+  
 
   private
 

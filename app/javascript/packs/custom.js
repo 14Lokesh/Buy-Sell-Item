@@ -8,5 +8,6 @@ $(document).ready(function() {
 $(document).ready(function() {
     $('#mark-read-button').click(function() {
       $('.notification-item').remove();
+      $('#notificationCounter').html('0');
     });
-});  
+});

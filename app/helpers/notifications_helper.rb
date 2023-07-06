@@ -3,7 +3,7 @@
 # This is a sample class representing an  Notification Helper.
 module NotificationsHelper
   def send_notification_and_mail(item, current_user)
-    notifications = item.user.notifications.create(message: "Name:#{current_user.username},Email:#{current_user.email}")
+    notifications = item.user.notifications.create(message: "Name:#{current_user.username},Email:#{current_user.email} is interested in your product")
     user = item.user.id
     ActionCable.server.broadcast("notifications_#{user}", { notification: notifications })
     interested_user = current_user

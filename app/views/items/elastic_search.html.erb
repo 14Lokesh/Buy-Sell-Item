@@ -22,14 +22,6 @@
         <% @items.each do |data| %>
           <div class="col mb-4">
             <div class="card" style="width: 18rem;">
-              <% @items_with_photos.each do |item_with_photos| %>
-                <div>
-                  <% item_with_photos[:photo_urls].each do |photo_url| %>
-                    <%= image_tag photo_url, alt: item_with_photos[:item].title, class: "card-img-top" %>
-                  <% end %>                
-                </div>
-                <% break %> 
-              <% end %>
               <div class="card-body"> 
                 <h5 class="card-title"><%= data.title %></h5>
                 <p class="card-text"><%= data.description %></p>

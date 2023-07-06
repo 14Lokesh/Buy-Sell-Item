@@ -9,4 +9,12 @@ module ConversationsHelper
   def redirect_unauthorized
     redirect_to root_path, notice: 'You are not authorized for this conversation'
   end
+
+  def opposed_user(user)
+    user == sender ? recipient : sender
+  end
+
+  def self.between(senders, recipients)
+    where(sender: senders, recipient: recipients).or(where(sender: recipients, recipient: senders))
+  end
 end

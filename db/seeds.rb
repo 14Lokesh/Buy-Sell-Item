@@ -43,7 +43,7 @@ end
 
 item4 = Item.create(title: ' 4BHK Villa', description: 'Best for joint family', username: 'Lokesh', phone: '8756657656',
                     city: 'Jaipur', category_id: category1.id, approved: true, user_id: regular_user1.id, approved_by_id: admin.id)
-image_paths = ['real-estate_1.jpg', 'real-estate_3.jpg']
+image_paths = ['real-estate1.jpg', 'real-estate3.jpg']
 image_paths.each do |image_path|
   path = Rails.root.join('app', 'assets', 'images', image_path)
   item4.images.attach(io: File.open(path), filename: image_path)

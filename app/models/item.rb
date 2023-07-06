@@ -13,8 +13,13 @@ class Item < ApplicationRecord
   validates :username, :city, presence: true
   include Elasticsearch::Model
   include Elasticsearch::Model::Callbacks
-  settings do
-    mappings dynamic: false do
+
+  def self.index_data
+    __elasticsearch__.create_index! force: true
+    __elasticsearch__.import
+  end
+  settings index: {number_of_shards: 1 } do
+    mappings dynamic: 'true' do
       indexes :title, type: :text, analyzer: :english
       indexes :city, type: :text, analyzer: :english
       indexes :description, type: :text, analyzer: :english
@@ -23,10 +28,6 @@ class Item < ApplicationRecord
       indexes :category, type: :keyword
     end
   end
-  # def self.index_data
-  #   __elasticsearch__.create_index! force: true
-  #   __elasticsearch__.import
-  # end
 
   def as_indexed_json(_options = {})
     {
@@ -51,12 +52,12 @@ class Item < ApplicationRecord
 
     if query.present?
       search_definition[:query][:bool][:must] << {
-        wildcard: {
-          title: {
-            value: "*#{query}*"
+        query_string: {
+            query: "*#{query}*",
+            fields: %i[title description category username ]
           }
         }
-      }
+      
     end
 
     if cities.present?
@@ -75,7 +76,7 @@ class Item < ApplicationRecord
       }
     }
 
-    search_definition
+     search_definition
   end
-  # index_data
+  index_data
 end

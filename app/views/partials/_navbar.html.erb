@@ -33,10 +33,6 @@
             <li class="nav-item">
               <%= link_to "Add Category", new_category_path, class: "nav-link" %>
             </li>
-
-            <li class="nav-item">
-              <%= link_to "Pending Post", admin_index_path, class: "nav-link" %>
-            </li>
           <% end %>
 
           <li class="nav-item">
@@ -59,7 +55,7 @@
           <li class="nav-item">
             <button class="btn btn-secondary" data-toggle="modal" data-target="#notificationModal">
               <i class="fa-regular fa-bell"></i>
-              <span class="badge bg-danger" id="notificationCounter"></span>
+              <span class="badge bg-danger" id="notificationCounter"><%= current_user.notifications.where(read: false).count%></span>
             </button>
           </li>
 
@@ -117,6 +113,11 @@
               <li class="list-group-item">
                 <%= link_to "Profile", profile_path, class: "btn btn-link text-decoration-none text-reset" %>
               </li>
+            <% if Current.user && Current.user.admin%>
+              <li class="list-group-item">
+                <%= link_to "Pending Post", admin_index_path, class: "btn btn-link text-decoration-none text-reset" %>
+              </li>
+              <%end%>
               <li class="list-group-item">
                 <%= link_to "Change Email", edit_user_path(current_user), class: "btn btn-link text-decoration-none text-reset" %>
               </li>
