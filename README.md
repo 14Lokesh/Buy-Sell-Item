@@ -1,4 +1,10 @@
 # README
+STEPS TO RUN THE PROJECT
+   STEP1 -  bundle install
+   STEP2 -  yarn install
+   STEP3 -  sudo systemctl start elasticsearch
+   STEP4 -  rails db:setup
+   STEP5 -  rails s
 
 This README would normally document whatever steps are necessary to get the
 application up and running.
