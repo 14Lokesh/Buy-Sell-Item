@@ -20,12 +20,12 @@ class Item < ApplicationRecord
   end
   settings index: {number_of_shards: 1 } do
     mappings dynamic: 'true' do
-      indexes :title, type: :text, analyzer: :english
-      indexes :city, type: :text, analyzer: :english
-      indexes :description, type: :text, analyzer: :english
-      indexes :approved, analyzer: :english
-      indexes :username, type: :text, analyzer: :english
-      indexes :category, type: :keyword
+      indexes :title, type: :text
+      indexes :city, type: :text
+      indexes :description, type: :text
+      indexes :approved, type: :boolean
+      indexes :username, type: :text
+      indexes :category, type: :text
     end
   end
 
@@ -54,7 +54,7 @@ class Item < ApplicationRecord
       search_definition[:query][:bool][:must] << {
         query_string: {
             query: "*#{query}*",
-            fields: %i[title description category username ]
+            fields: %i[title  category ]
           }
         }
       

@@ -28,7 +28,7 @@ class UsersController < ApplicationController
       render :edit
     else
       @user.update(user_params)
-      redirect_to root_path, notice: 'Email Updated'
+      redirect_to root_path, notice: 'Email Updated!!'
     end
   end
 

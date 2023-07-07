@@ -14,7 +14,7 @@ class ItemsController < ApplicationController
   def create
     @item = Item.new(item_params)
     @item.user_id = current_user.id
-    if @item.save!
+    if @item.save
       redirect_to root_path, notice: 'Sent to admin for approval'
     else
       render :new
@@ -29,16 +29,8 @@ class ItemsController < ApplicationController
   def elastic_search
     query = params.dig(:search_items, :query)
     city = params.dig(:search_items, :city)
-    @items = query.present? ? Item.search(Item.search_items(query, city)) : []
-    @items_with_photos = @items.map do |result|
-      items = Item.find(result._id)
-      if items.images.present?
-        photo_url = items.images.map { |image| url_for(image) }
-        { item: items, photo_urls: photo_url }
-      end
-    end.compact
+    @item = Item.search(Item.search_items(query.strip, city)).records
   end
-  
 
   private
 

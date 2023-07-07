@@ -26,7 +26,7 @@
       <%= form_with(model: Conversation.new, url: conversations_path) do |form| %>
         <%= form.hidden_field :recipient_id, value: @item.user_id %>
         <%= form.button(type: 'submit', class: "button-design btn btn-primary") do %>
-          <%= content_tag(:i, nil, class: 'fa fa-brands fa-whatsapp') %>
+          <%= content_tag(:i, nil) %>
           Chat
         <% end %>
       <% end %>

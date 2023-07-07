@@ -16,7 +16,6 @@
  @import 'bootstrap';
  
  .button-design{
-    // background-image: linear-gradient(#0dccea, #0d70ea);
     background-image: linear-gradient(#059c1c, #04764a);
     border: 0;
     border-radius: 4px;
@@ -35,7 +34,7 @@
   
   }
 .card{
-  max-width: 300px; /* Adjust the value to your desired width */
+  max-width: 300px; 
     margin: 0 auto;
 }
 .abc {
@@ -43,10 +42,10 @@
 }
 .notifications-list {
   word-wrap: break-word;
-  max-width: 400px; /* Adjust this value to your desired width */
+  max-width: 400px; 
 }
 .custom-carousel {
-  max-width: 500px; /* Adjust the width as per your preference */
+  max-width: 500px;
   margin: 0 auto;
 }
 .item-info {
@@ -71,14 +70,12 @@
 }
 .flash-message {
   position: fixed;
-  top: 0; /* Position the message at the top */
-  left: 50%; /* Position the message 50% from the left */
-  transform: translateX(-50%); /* Center the message horizontally */
-  width: 400px; /* Set the desired width */
-  /* background-color: white; */
+  top: 0; 
+  left: 50%;
+  transform: translateX(-50%);
+  width: 400px; 
   padding: 20px;
   border-radius: 5px;
-  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
 }
 .notification-item {
   border: 1px solid #ccc;
@@ -95,7 +92,6 @@
   height: 85vh;
   background-color: #f2f2f2;
 }
-
 .centered-heading {
   text-align: center;
   padding: 10px;

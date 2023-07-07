@@ -1,6 +1,6 @@
 <div class="container">
   <div id="messages">
-    <h1 class="text-center">Chat with <%= @conversation.opposed_user(current_user).email %></h1>
+    <h1 class="text-center">Chat with <%= @conversation.opposed_user(current_user).username %></h1>
     <% @conversation.messages.each do |message| %>
       <div class="message">
         <p><strong><%= message.sender.email %>:</strong> <%= message.body %></p>
