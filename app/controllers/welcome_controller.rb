@@ -2,4 +2,5 @@
 
 # This is a sample class representing an  Welcome controller.
 class WelcomeController < ApplicationController
+
 end

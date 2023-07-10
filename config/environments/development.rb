@@ -80,8 +80,8 @@ Rails.application.configure do
     port: 587,
     authentication: "plain",
     enable_starttls_auto: true,
-    user_name: "lokeshkumarchaman@gmail.com",
-    password: "gqlpnxzkyiuwvcjk", 
+    user_name: Rails.application.credentials.development[:user_name],
+    password: Rails.application.credentials.development[:password],
     domain: "smtp.gmail.com",
     openssl_verify_mode: "none",
   }

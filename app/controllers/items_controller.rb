@@ -15,7 +15,8 @@ class ItemsController < ApplicationController
     @item = Item.new(item_params)
     @item.user_id = current_user.id
     if @item.save
-      redirect_to root_path, notice: 'Sent to admin for approval'
+      redirect_to root_path
+      flash[:notice] = 'Sent to admin for approval'
     else
       render :new
     end
