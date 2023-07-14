@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
 #
@@ -16,7 +18,7 @@ category3 = Category.create(category: 'Electronics')
 category4 = Category.create(category: 'Furniture')
 category5 = Category.create(category: 'Books')
 category6 = Category.create(category: 'Services')
-
+# rubocop:disable Layouts/LineLength
 item1 = Item.create(title: 'Arduino', description: 'Brand new arduino for sell ', username: 'Lokesh', phone: '8756657656',
                     city: 'Kolkata', category_id: category3.id, approved: true, user_id: regular_user1.id, approved_by_id: admin.id)
 image_paths = ['arduino_1.jpg', 'arduino_2.jpg']
@@ -59,6 +61,7 @@ end
 
 item6 = Item.create(title: 'Hondacity', description: 'Contact us for Serivces', username: 'Jabra Ram', phone: '8756657656',
                     city: 'Kolkata', category_id: category6.id, approved: true, user_id: regular_user2.id, approved_by_id: admin.id)
+# rubocop:enable Layouts/LineLength
 image_paths = ['hondacity.jpg']
 image_paths.each do |image_path|
   path = Rails.root.join('app', 'assets', 'images', image_path)

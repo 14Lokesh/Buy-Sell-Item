@@ -117,3 +117,19 @@
   width: 100%;
   object-fit: cover;
 }
+.pagination {
+  display: inline-block;
+}
+
+.pagination .page-item {
+  display: inline-block;
+}
+
+.pagination .page-item .page-link {
+  text-align: center;
+}
+.required::after {
+  content: "*";
+  color: red;
+  margin-left: 3px;
+}

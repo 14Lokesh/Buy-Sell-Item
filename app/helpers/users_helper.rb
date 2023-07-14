@@ -11,9 +11,7 @@ module UsersHelper
       redirect_to root_path(user)
     else
       User.create(uid:, name: user_name, email: user_email)
-      redirect_to root_path(user)
     end
-
     redirect_to root_path
   end
 end

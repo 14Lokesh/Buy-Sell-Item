@@ -4,17 +4,14 @@
 class SessionsController < ApplicationController
   include UsersHelper
   before_action :require_user_logged_in!, only: %i[mail_to_seller edit]
-  def new
-    # redirect_to root_path if Current.user
-  end
+  def new; end
 
   def create
     user = User.find_by(email: params[:email])
-    if user.present? && user.authenticate(params[:password])
+    if user&.authenticate(params[:password])
       session[:user_id] = user.id
       cookies.signed[:user_id] = user.id
-      redirect_to root_path
-      flash[:notice] = 'Logged in successfully'
+      redirect_to root_path, flash: { notice: 'Logged in successfully' }
     else
       render :new
     end
@@ -25,6 +22,8 @@ class SessionsController < ApplicationController
     redirect_to root_path
   end
 
+  # rubocop:disable Metrics/AbcSize
+  # rubocop:disable Metrics/MethodLength
   def omniauth
     user = User.find_or_create_by(uid: request.env['omniauth.auth'][:uid],
                                   provider: request.env['omniauth.auth'][:provider]) do |u|
@@ -40,6 +39,8 @@ class SessionsController < ApplicationController
       redirect_to new_session_path
     end
   end
+  # rubocop:enable Metrics/AbcSize
+  # rubocop:enable Metrics/MethodLength
 
   def facebook_login
     auth = request.env['omniauth.auth']

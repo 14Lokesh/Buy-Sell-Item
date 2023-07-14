@@ -13,5 +13,4 @@ class Conversation < ApplicationRecord
   def self.between(senders, recipients)
     where(sender: senders, recipient: recipients).or(where(sender: recipients, recipient: senders))
   end
-
 end

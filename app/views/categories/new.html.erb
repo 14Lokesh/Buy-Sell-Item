@@ -3,7 +3,7 @@
     <div class="col-md-6">
       <%= form_with model: @category, url: categories_path, class: "my-form" do |form| %>
         <div class="form-group mt-4">
-          <%= form.label :Add_category %>
+          <%= form.label :Add_category, class: 'required' %>
           <%= form.text_field :category, class: "form-control", placeholder: "Enter Category" %>
           <p class='error'><%= show_errors(@category, :category) %></p>
         </div>

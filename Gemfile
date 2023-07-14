@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
@@ -8,8 +10,8 @@ gem 'rails', '~> 6.1.7', '>= 6.1.7.3'
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 1.1'
 # Use Puma as the app server
-gem 'puma', '~> 5.0'
 gem 'bootstrap', '~> 5.0'
+gem 'puma', '~> 5.0'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '>= 6'
@@ -29,19 +31,18 @@ gem 'dotenv-rails'
 gem 'elasticsearch', '~>7.17.7'
 gem 'elasticsearch-model'
 gem 'elasticsearch-rails'
+gem 'factory_bot_rails', '~> 6.0'
+gem 'jquery-rails'
+gem 'kaminari'
 gem 'koala'
 gem 'omniauth'
+gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-rails_csrf_protection'
-gem 'omniauth-facebook'
-gem 'rspec-rails', '~> 4.0'
-
 gem 'pry'
 gem 'redis', '~> 4.2'
-gem 'jquery-rails'
-gem 'factory_bot_rails', '~> 6.0'
-
-
+gem 'rspec-rails', '~> 4.0'
+gem 'rubocop'
 
 # Use Active Storage variant
 gem 'image_processing', '~> 1.2'
@@ -51,7 +52,7 @@ gem 'bootsnap', '>= 1.4.4', require: false
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'byebug', platforms: %i[mri mingw x64_mingw]
 end
 
 group :development do
@@ -75,4 +76,4 @@ group :test do
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]

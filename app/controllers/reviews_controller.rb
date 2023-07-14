@@ -8,8 +8,7 @@ class ReviewsController < ApplicationController
     @review = @item.reviews.build(review_params)
     @review.user = current_user
     if @review.save
-      redirect_to @item
-      flash[:notice] = 'Review was successfully created.'
+      redirect_to @item, flash: { notice: 'Review was successfully created.' }
     else
       render 'items/show'
     end

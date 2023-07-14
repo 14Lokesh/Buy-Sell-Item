@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# This is a sample class representing an Job.
 class ApplicationJob < ActiveJob::Base
   # Automatically retry jobs that encountered a deadlock
   # retry_on ActiveRecord::Deadlocked

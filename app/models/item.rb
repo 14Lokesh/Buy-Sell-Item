@@ -18,7 +18,7 @@ class Item < ApplicationRecord
     __elasticsearch__.create_index! force: true
     __elasticsearch__.import
   end
-  settings index: {number_of_shards: 1 } do
+  settings index: { number_of_shards: 1 } do
     mappings dynamic: 'true' do
       indexes :title, type: :text
       indexes :city, type: :text
@@ -29,6 +29,7 @@ class Item < ApplicationRecord
     end
   end
 
+  # rubocop:disable  Style/HashSyntax
   def as_indexed_json(_options = {})
     {
       id: id,
@@ -40,7 +41,10 @@ class Item < ApplicationRecord
       category: category.category
     }
   end
+  # rubocop:enable  Style/HashSyntax
 
+  # rubocop: disable Metrics/AbcSize
+  # rubocop: disable Metrics/MethodLength
   def self.search_items(query, cities)
     search_definition = {
       query: {
@@ -53,11 +57,10 @@ class Item < ApplicationRecord
     if query.present?
       search_definition[:query][:bool][:must] << {
         query_string: {
-            query: "*#{query}*",
-            fields: %i[title  category ]
-          }
+          query: "*#{query}*",
+          fields: %i[title category]
         }
-      
+      }
     end
 
     if cities.present?
@@ -75,8 +78,9 @@ class Item < ApplicationRecord
         approved: true
       }
     }
-
-     search_definition
+    search_definition
   end
   index_data
 end
+# rubocop: enable Metrics/AbcSize
+# rubocop: enable Metrics/MethodLength

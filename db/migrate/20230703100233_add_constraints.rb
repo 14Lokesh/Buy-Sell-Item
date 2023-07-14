@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
+# This is a class
 class AddConstraints < ActiveRecord::Migration[6.1]
+  # rubocop:disable Metrics/MethodLength
   def change
     change_column :users, :username, :string, null: false, limit: 30
     change_column :users, :email, :string, null: false, limit: 50
@@ -16,3 +18,4 @@ class AddConstraints < ActiveRecord::Migration[6.1]
     change_column :messages, :body, :text, null: false
   end
 end
+# rubocop:enable Metrics/MethodLength

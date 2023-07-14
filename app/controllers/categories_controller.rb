@@ -12,8 +12,7 @@ class CategoriesController < ApplicationController
   def create
     @category = Category.new(category_params)
     if @category.save
-      redirect_to root_path
-      flash[:notice] = 'Category has been added'
+      redirect_to root_path, flash: { notice: 'Category has been added' }
     else
       render :new
     end

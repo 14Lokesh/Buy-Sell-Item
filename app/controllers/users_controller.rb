@@ -28,8 +28,7 @@ class UsersController < ApplicationController
       render :edit
     else
       @user.update(user_params)
-      redirect_to root_path
-      flash[:notice] = 'Email Updated!!'
+      redirect_to root_path, flash: { notice: 'Email Updated!!' }
     end
   end
 

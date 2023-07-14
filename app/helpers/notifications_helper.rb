@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 # This is a sample class representing an  Notification Helper.
+# rubocop:disable Metrics/AbcSize
+# rubocop:disable Layout/LineLength
 module NotificationsHelper
   def send_notification_and_mail(item, current_user)
     notifications = item.user.notifications.create(message: "Name:#{current_user.username},Email:#{current_user.email} is interested in your product")
@@ -12,3 +14,5 @@ module NotificationsHelper
     redirect_to product_path, notice: 'Mail and Notification have been sent to the Seller'
   end
 end
+# rubocop:enable Metrics/AbcSize
+# rubocop:enable Layout/LineLength

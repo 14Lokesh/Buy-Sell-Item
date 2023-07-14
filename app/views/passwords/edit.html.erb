@@ -2,12 +2,12 @@
 <div class="container mx-auto w-50">
   <%= form_with model: @user, url: password_path, method: :patch do |form| %>
     <div class="form-group my-3">
-      <%= form.label :password, class: "form-label" %>
+      <%= form.label :password, class: "form-label required" %>
       <%= form.password_field :password, class: "form-control ", placeholder: "Enter Your password" %>
     </div>
 
     <div class="form-group my-3">
-      <%= form.label :password_confirmation, class: "form-label" %>
+      <%= form.label :password_confirmation, class: "form-label required" %>
       <%= form.password_field :password_confirmation, class: "form-control ", placeholder: "Enter Your password" %>
     </div>
   
