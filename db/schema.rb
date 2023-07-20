@@ -1,5 +1,4 @@
-# frozen_string_literal: true
-
+# rubocop:disable all
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -11,8 +10,8 @@
 # migrations use external dependencies or application code.
 #
 # It's strongly recommended that you check this file into your version control system.
-# rubocop:disable Metrics/BlockLength
-ActiveRecord::Schema.define(version: 20_230_705_074_423) do
+
+ActiveRecord::Schema.define(version: 20_230_719_071_926) do
   # These are extensions that must be enabled in order to support this database
   enable_extension 'plpgsql'
 
@@ -81,6 +80,7 @@ ActiveRecord::Schema.define(version: 20_230_705_074_423) do
     t.text 'body', null: false
     t.datetime 'created_at', precision: 6, null: false
     t.datetime 'updated_at', precision: 6, null: false
+    t.boolean 'read', default: false
   end
 
   create_table 'notifications', force: :cascade do |t|
@@ -122,4 +122,3 @@ ActiveRecord::Schema.define(version: 20_230_705_074_423) do
   add_foreign_key 'reviews', 'items'
   add_foreign_key 'reviews', 'users'
 end
-# rubocop:enable Metrics/BlockLength

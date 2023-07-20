@@ -9,14 +9,20 @@
             <% else %>
               <p class="text-center">No image available.</p>
             <% end %>
-            <div class="card-body"> 
+            <div class="card-body">
               <h5 class="card-title"><%= item.title %></h5>
               <p class="card-text"><%= item.description %></p>
               <p><strong>Category:</strong> <%= item.category.category %></p>
               <p><strong>City:</strong> <%= item.city %></p>
-              <div class="text-center">
-                <%= button_to 'Interested', interested_path(item), method: :post, class: "btn btn-primary button-design" %>
-              </div>
+              <% if !Current.user&.admin%>
+                <div class="text-center" >
+                  <%= button_to 'Interested', interested_path(item), method: :post, class: "btn btn-primary button-design" %>
+                </div>
+              <%else%>
+                <div class="text-center">
+                  <%= link_to 'View More', product_path(item), class: "btn btn-primary button-design" %>
+                </div>
+              <%end%>
             </div>
           </div>
         </div>

@@ -13,7 +13,7 @@ class PasswordsController < ApplicationController
       render :edit
     else
       @user.update(user_params)
-      redirect_to root_path, flash: { notice: 'Password Updated' }
+      redirect_to items_path, flash: { notice: 'Password Updated' }
     end
   end
 

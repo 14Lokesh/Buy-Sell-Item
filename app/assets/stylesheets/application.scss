@@ -86,27 +86,30 @@
   margin-bottom: 0;
 }
 .centered-container {
-  display: flex;
-  align-items: center;
   justify-content: center;
   height: 85vh;
-  background-color: #f2f2f2;
 }
+
 .centered-heading {
-  text-align: center;
-  padding: 10px;
-  border-radius: 10px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
-.centered-heading {
-  text-align: center;
-  background-color: #f2f2f2;
-  padding: 20px;
-  border-radius: 10px;
+.centered-container {
+  display: flex; 
+ align-items: center;
+ background-image: url('/assets/home_page.jpg'); 
+  background-size: cover;
+ background-position: center; 
 }
+
 .footer {
   background-color: white;
-  padding: 10px;
   text-align: center;
+  padding: 0.6rem;
+  font-size: 0.9rem;
+  width: 100%;
 }
 
 .error{
@@ -132,4 +135,12 @@
   content: "*";
   color: red;
   margin-left: 3px;
+}
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  filter: invert(100%);
+}
+.logo-image {
+  height: 2.5rem; /* Adjust the height to your desired size */
+  /* You can also use 'width' property to adjust the width if necessary */
 }

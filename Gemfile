@@ -40,7 +40,7 @@ gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-rails_csrf_protection'
 gem 'pry'
-gem 'redis', '~> 4.2'
+gem 'rspec-mocks', '~>3.12.5'
 gem 'rspec-rails', '~> 4.0'
 gem 'rubocop'
 

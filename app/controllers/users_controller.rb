@@ -12,7 +12,7 @@ class UsersController < ApplicationController
     if @user.save
       session[:user_id] = @user.id
       cookies.signed[:user_id] = @user.id
-      redirect_to root_path
+      redirect_to items_path
     else
       render :new
     end
@@ -28,13 +28,14 @@ class UsersController < ApplicationController
       render :edit
     else
       @user.update(user_params)
-      redirect_to root_path, flash: { notice: 'Email Updated!!' }
+      redirect_to items_path, flash: { notice: 'Email Updated!!' }
     end
   end
 
   def profile
     @user = current_user
     @items = @user.items.where(approved: true)
+    @item = Item.all
   end
 
   private

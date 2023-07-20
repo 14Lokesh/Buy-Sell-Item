@@ -61,9 +61,41 @@ end
 
 item6 = Item.create(title: 'Hondacity', description: 'Contact us for Serivces', username: 'Jabra Ram', phone: '8756657656',
                     city: 'Kolkata', category_id: category6.id, approved: true, user_id: regular_user2.id, approved_by_id: admin.id)
-# rubocop:enable Layouts/LineLength
-image_paths = ['hondacity.jpg']
+image_paths = ['hondacity.jpg', 'hondacity2.jpg']
 image_paths.each do |image_path|
   path = Rails.root.join('app', 'assets', 'images', image_path)
   item6.images.attach(io: File.open(path), filename: image_path)
+end
+
+item7 = Item.create(title: 'Chair', description: 'Comfortable for Tourist', username: 'Jabra Ram', phone: '8756657656',
+                    city: 'Jaipur', category_id: category4.id, approved: true, user_id: regular_user2.id, approved_by_id: admin.id)
+image_paths = ['chair.jpg', 'chair2.jpg']
+image_paths.each do |image_path|
+  path = Rails.root.join('app', 'assets', 'images', image_path)
+  item7.images.attach(io: File.open(path), filename: image_path)
+end
+
+item8 = Item.create(title: 'King Bed', description: 'Best for 3 people', username: 'Jabra Ram', phone: '8756657656',
+                    city: 'Kolkata', category_id: category4.id, approved: true, user_id: regular_user2.id, approved_by_id: admin.id)
+image_paths = ['bed.jpg', 'bed2.jpg']
+image_paths.each do |image_path|
+  path = Rails.root.join('app', 'assets', 'images', image_path)
+  item8.images.attach(io: File.open(path), filename: image_path)
+end
+
+item9 = Item.create(title: 'Fan', description: 'Partner of Summer, cool and relax', username: 'Lokesh', phone: '8756657656',
+                    city: 'Kolkata', category_id: category3.id, approved: false, user_id: regular_user1.id)
+image_paths = ['fan1.jpg', 'fan2.jpg']
+image_paths.each do |image_path|
+  path = Rails.root.join('app', 'assets', 'images', image_path)
+  item9.images.attach(io: File.open(path), filename: image_path)
+end
+
+item10 = Item.create(title: 'Redmi 10 Pro', description: 'Best one under 20K', username: 'Jabra Ram', phone: '8756657656',
+                     city: 'Kolkata', category_id: category3.id, approved: false, user_id: regular_user2.id)
+# rubocop:enable Layouts/LineLength
+image_paths = ['mobile.jpg', 'mobile2.jpg']
+image_paths.each do |image_path|
+  path = Rails.root.join('app', 'assets', 'images', image_path)
+  item10.images.attach(io: File.open(path), filename: image_path)
 end

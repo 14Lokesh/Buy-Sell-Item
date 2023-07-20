@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   end
 
   def require_user_logged_in!
-    redirect_to new_session_path if Current.user.nil?
+    redirect_to new_session_path, flash: { notice: 'Kindly login' } if Current.user.nil?
   end
 
   def current_user
@@ -23,5 +23,9 @@ class ApplicationController < ActionController::Base
 
   def current_admin
     @current_admin ||= User.find_by(id: session[:user_id])
+  end
+
+  def restrict_admin
+    redirect_to root_path, flash: { notice: 'Admin is not allowed' } if Current.user.admin?
   end
 end

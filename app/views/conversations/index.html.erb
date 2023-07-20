@@ -1,8 +1,15 @@
 <div class="container">
   <h1 class="text-center mb-4">Conversations</h1>
   <div class="list-group">
+    <% has_message = false %>
     <% @conversations.each do |conversation| %>
-     <strong>Chat With: </strong> <%= link_to conversation.opposed_user(current_user).email, conversation, class: 'list-group-item list-group-item-action mb-2 text-decoration-none text-primary', style: 'width: 300px;' %>
+      <% if conversation.opposed_user(current_user).email.present? %>
+        <% has_message = true %>
+        <strong>Chat With: </strong> <%= link_to conversation.opposed_user(current_user).email+'('+conversation.messages.unread_from_sender(current_user).count.to_s+')', conversation, class: 'list-group-item list-group-item-action mb-2 text-decoration-none text-primary', style: 'width: 300px;' %>
+      <% end %>
+    <% end %>
+    <% unless has_message %>
+      <h4>No message Received from any User</h4>
     <% end %>
   </div>
 </div>

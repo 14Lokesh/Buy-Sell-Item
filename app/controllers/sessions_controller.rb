@@ -8,11 +8,12 @@ class SessionsController < ApplicationController
 
   def create
     user = User.find_by(email: params[:email])
-    if user&.authenticate(params[:password])
+    if authenticate_user(user)
       session[:user_id] = user.id
       cookies.signed[:user_id] = user.id
-      redirect_to root_path, flash: { notice: 'Logged in successfully' }
+      redirect_to items_path, flash: { notice: 'Logged in successfully' }
     else
+      flash[:notice] = 'Invalid Email or Password'
       render :new
     end
   end
@@ -22,25 +23,33 @@ class SessionsController < ApplicationController
     redirect_to root_path
   end
 
-  # rubocop:disable Metrics/AbcSize
-  # rubocop:disable Metrics/MethodLength
   def omniauth
-    user = User.find_or_create_by(uid: request.env['omniauth.auth'][:uid],
-                                  provider: request.env['omniauth.auth'][:provider]) do |u|
-      u.username = request.env['omniauth.auth'][:info][:first_name]
-      u.email = request.env['omniauth.auth'][:info][:email]
+    user = find_or_create_user
+    process_user(user)
+  end
+
+  def find_or_create_user
+    auth_data = request.env['omniauth.auth']
+    User.find_or_create_by(uid: auth_data[:uid], provider: auth_data[:provider]) do |u|
+      u.username = auth_data[:info][:first_name]
+      u.email = auth_data[:info][:email]
       u.password = SecureRandom.hex(15)
     end
+  end
+
+  def process_user(user)
     if user.valid?
-      session[:user_id] = user.id
-      cookies.signed[:user_id] = user.id
+      user_session(user)
       redirect_to root_path
     else
       redirect_to new_session_path
     end
   end
-  # rubocop:enable Metrics/AbcSize
-  # rubocop:enable Metrics/MethodLength
+
+  def user_session(user)
+    session[:user_id] = user.id
+    cookies.signed[:user_id] = user.id
+  end
 
   def facebook_login
     auth = request.env['omniauth.auth']

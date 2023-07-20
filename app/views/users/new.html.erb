@@ -11,19 +11,19 @@
         <div class="form-group">
           <%= form.label :email, class: 'required' %>
           <%= form.email_field :email, class: "form-control", placeholder: "Enter Your Email", required: true%>
-           <p class='error'><%= show_errors(@user, :email) %></p>       
+          <p class='error'><%= show_errors(@user, :email) %></p>
         </div>
         <div class="form-group">
           <%= form.label :password, class: 'required' %>
           <%= form.password_field :password, class: "form-control", placeholder: "Enter Your Password", required: true%>
-           <p class='error'><%= show_errors(@user, :password) %></p>       
+          <p class='error'><%= show_errors(@user, :password) %></p>
         </div>
         <div class="form-group">
           <%= form.label :password_confirmation, class: 'required' %>
           <%= form.password_field :password_confirmation, class: "form-control", placeholder: "Confirm Your Password", required: true%>
-           <p class='error'><%= show_errors(@user, :password_confirmation) %></p>       
-        </div>     
-        <%= form.submit "Sign Up", class: " mt-3 button-design form-control" %>     
+          <p class='error'><%= show_errors(@user, :password_confirmation) %></p>
+        </div>
+        <%= form.submit "Sign Up", class: " mt-3 button-design form-control" %>
       <% end %>
       <div class="text-center">
         <%= button_to 'Sign up with Google', '/auth/google_oauth2', class: "btn btn-outline-danger btn-block mt-3 form-control" %>
@@ -32,6 +32,3 @@
     </div>
   </div>
 </div>
-
-
-

@@ -4,6 +4,7 @@
 class ConversationsController < ApplicationController
   before_action :require_user_logged_in!
   before_action :restrict_user, only: [:show]
+  before_action :restrict_admin, only: %i[index create show]
   include ConversationsHelper
   def index
     @conversations = current_user.sent_conversations.or(current_user.received_conversations)
@@ -18,6 +19,7 @@ class ConversationsController < ApplicationController
 
   def show
     @conversation = Conversation.find(params[:id])
+    @conversation.messages.unread_received(current_user).update_all(read: true)
     @message = Message.new
   end
 

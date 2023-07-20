@@ -17,7 +17,7 @@ class AdminController < ApplicationController
     @item.approved_by_id = @admin.id
     @item.approved = true
     @item.save
-    redirect_to root_path, flash: { notice: 'Approved Successfully' }
+    redirect_to items_path, flash: { notice: 'Approved Successfully' }
   end
 
   def destroy

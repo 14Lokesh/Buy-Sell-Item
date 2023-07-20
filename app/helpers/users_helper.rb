@@ -6,6 +6,10 @@ module UsersHelper
     session[:user_id] = user.id
   end
 
+  def authenticate_user(user)
+    user&.authenticate(params[:password])
+  end
+
   def redirect_to_existing_user_or_create_new(user, uid, user_name, user_email)
     if user
       redirect_to root_path(user)

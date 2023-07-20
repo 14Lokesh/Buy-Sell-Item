@@ -2,7 +2,8 @@
 
 # This is a sample class representing an  Item controller.
 class ItemsController < ApplicationController
-  before_action :require_user_logged_in!, only: %i[product new]
+  before_action :require_user_logged_in!, only: %i[show new]
+  before_action :restrict_admin, only: %i[new create]
   def index
     @item = Item.all
     @item = Item.page(params[:page]).per(6)
@@ -16,7 +17,7 @@ class ItemsController < ApplicationController
     @item = Item.new(item_params)
     @item.user_id = current_user.id
     if @item.save
-      redirect_to root_path, flash: { notice: 'Sent to admin for approval' }
+      redirect_to items_path, flash: { notice: 'Sent to admin for approval' }
     else
       render :new
     end
@@ -25,6 +26,10 @@ class ItemsController < ApplicationController
   def show
     @item = Item.find(params[:id])
     @review = Review.new
+  end
+
+  def product
+    @item = Item.find(params[:id])
   end
 
   def elastic_search

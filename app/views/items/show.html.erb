@@ -22,15 +22,17 @@
     <% else %>
       <p>No image available.</p>
     <% end %>
-    <div class="text-center">
-      <%= form_with(model: Conversation.new, url: conversations_path) do |form| %>
-        <%= form.hidden_field :recipient_id, value: @item.user_id %>
-        <%= form.button(type: 'submit', class: "button-design btn btn-primary") do %>
-          <%= content_tag(:i, nil) %>
-          Chat
+    <% if !Current.user.admin%>
+      <div class="text-center">
+        <%= form_with(model: Conversation.new, url: conversations_path) do |form| %>
+          <%= form.hidden_field :recipient_id, value: @item.user_id %>
+          <%= form.button(type: 'submit', class: "button-design btn btn-primary") do %>
+            <%= content_tag(:i, nil) %>
+            Chat
+          <% end %>
         <% end %>
-      <% end %>
-    </div>
+      </div>
+    <% end%>
     <div class="row justify-content-center">
       <div class="col-md-6">
         <div class="item-info">
@@ -46,36 +48,38 @@
       </div>
     </div>
   </div>
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-md-6">
-        <%= form_with(model: [@item, @review], url: item_reviews_path(@item), method: :post, html: { class: 'form' }) do |form| %>
-          <div class="form-group">
-            <%= form.label :content, "Review", class: 'required' %>
-            <%= form.text_area :content, rows: 2, class: 'form-control mb-3', required: true %>
-            <p class="error"><%= form.object.errors.full_messages_for(:content).first %></p>
-          </div>
-          <div class="form-group">
-            <%= form.label :rating, "Rating", class: 'required' %>
-            <%= form.select :rating, (1..5).to_a, { prompt: 'Select rating' }, required: true %>
-          </div>
-          <%= form.submit "Submit Review", class: 'button-design' %>
-        <% end %>
-      </div>
-    </div>
-  </div>
-  <h2 class="text-center">Reviews</h2>
-  <div class="row">
-    <% @item.reviews.each do |review| %>
-      <div class="col-md-4">
-        <div class="card">
-          <div class="card-body">
-            <h5>Buyer: <%= current_user.username %></h5>
-            <p class="card-text"><strong>Rating:</strong> <%= review.rating %></p>
-            <p class="card-text"><strong>Content:</strong> <%= review.content %></p>
-          </div>
+  <% if !Current.user.admin%>
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          <%= form_with(model: [@item, @review], url: item_reviews_path(@item), method: :post, html: { class: 'form' }) do |form| %>
+            <div class="form-group">
+              <%= form.label :content, "Review", class: 'required' %>
+              <%= form.text_area :content, rows: 2, class: 'form-control mb-3', required: true %>
+              <p class="error"><%= form.object.errors.full_messages_for(:content).first %></p>
+            </div>
+            <div class="form-group">
+              <%= form.label :rating, "Rating", class: 'required' %>
+              <%= form.select :rating, (1..5).to_a, { prompt: 'Select rating' }, required: true %>
+            </div>
+            <%= form.submit "Submit Review", class: 'button-design' %>
+          <% end %>
         </div>
       </div>
-    <% end %>
+    </div>
+    <h2 class="text-center">Reviews</h2>
+    <div class="row">
+      <% @item.reviews.each do |review| %>
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-body">
+              <h5>Buyer: <%= current_user.username %></h5>
+              <p class="card-text"><strong>Rating:</strong> <%= review.rating %></p>
+              <p class="card-text"><strong>Content:</strong> <%= review.content %></p>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
   </div>
-</div>
+<% end%>
