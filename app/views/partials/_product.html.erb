@@ -12,7 +12,7 @@
             <div class="card-body">
               <h5 class="card-title"><%= item.title %></h5>
               <p class="card-text"><%= item.description %></p>
-              <p><strong>Category:</strong> <%= item.category.category %></p>
+              <p><strong>Category:</strong> <%=item.category.name%></p>
               <p><strong>City:</strong> <%= item.city %></p>
               <% if !Current.user&.admin%>
                 <div class="text-center" >

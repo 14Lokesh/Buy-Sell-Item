@@ -1,14 +1,14 @@
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-md-6">
-      <%= form_with model: @category, url: categories_path, class: "my-form" do |form| %>
+      <%= form_with model: @category, url: category_path, method: :patch, class: "my-form" do |form| %>
         <div class="form-group mt-4">
-          <%= form.label :Add_category, class: 'required' %>
+          <%= form.label :Edit_category, class: 'required' %>
           <%= form.text_field :name, class: "form-control", placeholder: "Enter Category", required: true %>
           <p class='error'><%= show_errors(@category, :name) %></p>
         </div>
-        <%= form.submit "Submit",class: " mt-3 form-control button-design" %>
+        <%= form.submit "Update", class: "mt-3 form-control button-design" %>
       <% end %>
     </div>
   </div>
-  <%= link_to "View All Category", categories_path, class: " button-design btn btn-info" %>
+</div>

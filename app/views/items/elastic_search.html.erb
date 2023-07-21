@@ -5,7 +5,7 @@
     
       <%= form.text_field :query, value: params[:search_items].presence && params[:search_items][:query], placeholder: "Search Field" %>
     
-      <%= form.text_field :city, value: params[:search_items].presence && params[:search_items][:city], placeholder: "Filter on location" %>
+      <%= form.text_field :data, value: params[:search_items].presence && params[:search_items][:data], placeholder: "Filter on location/Category" %>
       <%= submit_tag 'Search' %>
     
     <% end %>
@@ -15,7 +15,7 @@
   <% if params[:search_items].present? && @item.empty? %>
     <h2 class="text-center">No items found matching your query.</h2>
   <% elsif @item.present? %>
-    <h2 class="text-center mb-4 mt-4">Items in Stock. Visit the Buy page to buy the product.</h2>
+    <h2 class="text-center mb-4 mt-4">Items in Stock. Visit the page to buy the product.</h2>
     <%= render 'partials/product'%>
   <% end %>
 <% end %>

@@ -6,7 +6,7 @@ class ItemsController < ApplicationController
   before_action :restrict_admin, only: %i[new create]
   def index
     @item = Item.all
-    @item = Item.page(params[:page]).per(6)
+    @item = Item.page(params[:page]).per(7)
   end
 
   def new
@@ -34,8 +34,8 @@ class ItemsController < ApplicationController
 
   def elastic_search
     query = params.dig(:search_items, :query)
-    city = params.dig(:search_items, :city)
-    @item = Item.search(Item.search_items(query.strip, city)).records
+    data = params.dig(:search_items, :data)
+    @item = Item.search(Item.search_items(query.strip, data)).records
   end
 
   private

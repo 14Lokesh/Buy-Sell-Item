@@ -25,7 +25,7 @@ class Item < ApplicationRecord
       indexes :description, type: :text
       indexes :approved, type: :boolean
       indexes :username, type: :text
-      indexes :category, type: :text
+      indexes :name, type: :text
     end
   end
 
@@ -38,14 +38,14 @@ class Item < ApplicationRecord
       description: description,
       approved: approved,
       username: username,
-      category: category.category
+      name: category&.name
     }
   end
   # rubocop:enable  Style/HashSyntax
 
   # rubocop: disable Metrics/AbcSize
   # rubocop: disable Metrics/MethodLength
-  def self.search_items(query, cities)
+  def self.search_items(query, data)
     search_definition = {
       query: {
         bool: {
@@ -58,16 +58,17 @@ class Item < ApplicationRecord
       search_definition[:query][:bool][:must] << {
         query_string: {
           query: "*#{query}*",
-          fields: %i[title category]
+          fields: %i[title name]
         }
       }
     end
 
-    if cities.present?
+    if data.present?
       search_definition[:query][:bool][:filter] ||= []
       search_definition[:query][:bool][:filter] << {
-        term: {
-          city: cities
+        query_string: {
+          query: data,
+          fields: %i[city name]
         }
       }
     end

@@ -21,7 +21,7 @@
                 <p class="card-text"><strong>Seller name:</strong> <%= data.username %></p>
                 <p class="card-text"><strong>Phone:</strong> <%= data.phone %></p>
                 <p class="card-text"><strong>City:</strong> <%= data.city %></p>
-                <p class="card-text"><strong>Category:</strong> <%= data.category.category %></p>
+                <p class="card-text"><strong>Category:</strong> <%= data.category.name %></p>
               </div>
               <div class="d-flex justify-content-between card-body">
                 <%= button_to "Approve", submit_path(data), method: :post, class: "btn btn-primary" %>

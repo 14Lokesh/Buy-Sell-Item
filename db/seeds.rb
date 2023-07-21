@@ -12,13 +12,13 @@ regular_user2 = User.create(username: 'Jabra Ram', email: 'jrchoudhary2410@gmail
 regular_user3 = User.create(username: 'Mahfuz', email: 'mahfuzflamedestiny@gmail.com', password: 'password')
 admin = User.create(username: 'Admin', email: 'admin@gmail.com', password: 'password', admin: true)
 
-category1 = Category.create(category: 'Real Estate')
-category2 = Category.create(category: 'Cars')
-category3 = Category.create(category: 'Electronics')
-category4 = Category.create(category: 'Furniture')
-category5 = Category.create(category: 'Books')
-category6 = Category.create(category: 'Services')
-# rubocop:disable Layouts/LineLength
+category1 = Category.create(name: 'Real Estate')
+category2 = Category.create(name: 'Cars')
+category3 = Category.create(name: 'Electronics')
+category4 = Category.create(name: 'Furniture')
+category5 = Category.create(name: 'Books')
+category6 = Category.create(name: 'Services')
+# rubocop:disable Layout/LineLength
 item1 = Item.create(title: 'Arduino', description: 'Brand new arduino for sell ', username: 'Lokesh', phone: '8756657656',
                     city: 'Kolkata', category_id: category3.id, approved: true, user_id: regular_user1.id, approved_by_id: admin.id)
 image_paths = ['arduino_1.jpg', 'arduino_2.jpg']
@@ -93,7 +93,7 @@ end
 
 item10 = Item.create(title: 'Redmi 10 Pro', description: 'Best one under 20K', username: 'Jabra Ram', phone: '8756657656',
                      city: 'Kolkata', category_id: category3.id, approved: false, user_id: regular_user2.id)
-# rubocop:enable Layouts/LineLength
+# rubocop:enable Layout/LineLength
 image_paths = ['mobile.jpg', 'mobile2.jpg']
 image_paths.each do |image_path|
   path = Rails.root.join('app', 'assets', 'images', image_path)

@@ -28,29 +28,6 @@ class SessionsController < ApplicationController
     process_user(user)
   end
 
-  def find_or_create_user
-    auth_data = request.env['omniauth.auth']
-    User.find_or_create_by(uid: auth_data[:uid], provider: auth_data[:provider]) do |u|
-      u.username = auth_data[:info][:first_name]
-      u.email = auth_data[:info][:email]
-      u.password = SecureRandom.hex(15)
-    end
-  end
-
-  def process_user(user)
-    if user.valid?
-      user_session(user)
-      redirect_to root_path
-    else
-      redirect_to new_session_path
-    end
-  end
-
-  def user_session(user)
-    session[:user_id] = user.id
-    cookies.signed[:user_id] = user.id
-  end
-
   def facebook_login
     auth = request.env['omniauth.auth']
     u_id = auth['uid']
