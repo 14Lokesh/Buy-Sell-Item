@@ -22,7 +22,7 @@ Rails.application.routes.draw do
     resources :reviews, only: [:create]
   end
   mount ActionCable.server => '/cable'
-  root 'welcome#index'
+  root 'users#home_page'
   get '/auth/google_oauth2/callback', to: 'sessions#omniauth'
   post '/items/:id', to: 'admin#approved', as: 'submit'
   post '/items/:id/interested', to: 'notifications#interested', as: 'interested'

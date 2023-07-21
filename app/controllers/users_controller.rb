@@ -38,6 +38,8 @@ class UsersController < ApplicationController
     @item = Item.all
   end
 
+  def home_page; end
+
   private
 
   def user_params

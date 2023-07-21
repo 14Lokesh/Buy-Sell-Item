@@ -45,7 +45,7 @@
           <div class="nav-item">
             <%= form_for :search_items, url: search_items_path, method: :get, html: { class: "form-inline" } do |form| %>
               <div class="input-group">
-                <%= form.text_field :query, value: params[:search_items].presence && params[:search_items][:query], placeholder: "Search Field", class: "form-control" %>
+                <%= form.text_field :query, value: params[:search_items].presence && params[:search_items][:query], placeholder: "Search Field", class: "form-control",required: true %>
                 <div class="input-group-append">
                   <%= submit_tag 'Search', class: "btn btn-outline-success" %>
                 </div>

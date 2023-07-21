@@ -26,6 +26,7 @@ gem 'jbuilder', '~> 2.7'
 # Use Active Model has_secure_password
 
 gem 'actioncable'
+gem 'active_storage_validations'
 gem 'bcrypt', '~> 3.1.7'
 gem 'dotenv-rails'
 gem 'elasticsearch', '~>7.17.7'
