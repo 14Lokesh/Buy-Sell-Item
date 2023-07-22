@@ -7,13 +7,15 @@ class Item < ApplicationRecord
   belongs_to :user
   has_many :reviews, dependent: :destroy
   has_many_attached :images, dependent: :destroy
+
   validates :images, content_type: ['image/png', 'image/jpeg', 'image/jpg']
   validates :title, length: { maximum: 30 }, presence: true
   validates :description, length: { maximum: 100 }, presence: true
   validates :phone, presence: true, numericality: { only_integer: true, message: 'must be a valid phone number' },
                     length: { is: 10, message: 'must be 10 digits' },
-                    format: { with: VALID_PHONE_REGEX, message: 'must be a valid postive number' }
+                    format: { with: VALID_PHONE_REGEX, message: 'must be a valid phone number' }
   validates :username, :city, presence: true
+
   include Elasticsearch::Model
   include Elasticsearch::Model::Callbacks
 

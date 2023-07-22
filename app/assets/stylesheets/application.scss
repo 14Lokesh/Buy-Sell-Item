@@ -141,6 +141,15 @@
   filter: invert(100%);
 }
 .logo-image {
-  height: 2.5rem; /* Adjust the height to your desired size */
-  /* You can also use 'width' property to adjust the width if necessary */
+  height: 2.5rem; 
+}
+.admin_page{
+  height: 90vh;
+}
+.approval-page{
+  display: block;
+}
+.item-image{
+  width: 500px;
+  height: 300px;
 }

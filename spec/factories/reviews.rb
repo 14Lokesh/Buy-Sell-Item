@@ -2,9 +2,9 @@
 
 FactoryBot.define do
   factory :review do
-    content { 'just checking the content file' }
-    rating { 4 }
     association :user
     association :item
+    content { 'just checking the content file' }
+    rating { 4 }
   end
 end

@@ -13,7 +13,9 @@ Rails.application.routes.draw do
     get '/page/:page', action: :index, on: :collection
   end
   scope '/admin' do
-    resources :categories
+    resources :categories do
+      get '/page/:page', action: :index, on: :collection
+    end
   end
   resources :conversations, only: %i[index show create] do
     resources :messages, only: [:create]

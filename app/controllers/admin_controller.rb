@@ -17,13 +17,13 @@ class AdminController < ApplicationController
     @item.approved_by_id = @admin.id
     @item.approved = true
     @item.save
-    redirect_to items_path, flash: { notice: 'Approved Successfully' }
+    redirect_to items_path, flash: { notice: ' Item Approved Successfully' }
   end
 
   def destroy
     @item = Item.find(params[:id])
     @item.destroy
-    redirect_to root_path, flash: { notice: 'Deleted successfully' }
+    redirect_to admin_index_path, flash: { notice: 'Item Deleted successfully' }
   end
 
   def admin; end

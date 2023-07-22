@@ -6,7 +6,7 @@ class ItemsController < ApplicationController
   before_action :restrict_admin, only: %i[new create]
   def index
     @item = Item.all
-    @item = Item.page(params[:page]).per(6)
+    @item = Item.page(params[:page]).where(approved: true).per(6)
   end
 
   def new
