@@ -50,6 +50,11 @@ class ItemsController < ApplicationController
     @item = @item.approved_and_not_items_owner(current_user).page(params[:page]).per(6)
   end
 
+  def all_items
+    @item = Item.all
+    @item = @item.page(params[:page]).where(approved: true).per(6)
+  end
+
   private
 
   def item_params

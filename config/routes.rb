@@ -41,5 +41,6 @@ Rails.application.routes.draw do
   post 'reset_password', to: 'reset_password#create'
   get 'reset_password/edit/:reset_password_token', to: 'reset_password#edit', as: :edit_reset_password
   patch 'reset_password', to: 'reset_password#update'
+  get 'all_items', to: 'items#all_items'
 end
 # rubocop:enable Metrics/BlockLength

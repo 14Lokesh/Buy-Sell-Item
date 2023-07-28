@@ -15,6 +15,9 @@
           <li class="nav-item">
             <%= link_to 'Login', new_session_path, class: 'nav-link' %>
           </li>
+          <li class="nav-item">
+            <%= link_to 'Products', all_items_path, class: 'nav-link' %>
+          </li>
         <% end %>
         <% if Current.user %>
           <li class="nav-item">
