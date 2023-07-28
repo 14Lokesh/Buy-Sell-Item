@@ -24,8 +24,16 @@ class SessionsController < ApplicationController
   end
 
   def omniauth
-    user = find_or_create_user
-    process_user(user)
+    user = find_user_by_email(request.env['omniauth.auth']['info']['email'])
+    if user
+      log_in_and_redirect(user, 'Logged in successfully')
+    else
+      handle_new_user(request.env['omniauth.auth'])
+    end
+  end
+
+  def redirect_to_new_user
+    redirect_to new_user_path, flash: { notice: 'There was a problem' }
   end
 
   def facebook_login
@@ -36,8 +44,6 @@ class SessionsController < ApplicationController
     user = User.find_by(uid: u_id)
     redirect_to_existing_user_or_create_new(user, u_id, user_name, user_email)
   end
-
-  private
 
   def user_params
     params.require(:user).permit(:email)

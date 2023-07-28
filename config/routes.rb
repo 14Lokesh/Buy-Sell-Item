@@ -26,7 +26,7 @@ Rails.application.routes.draw do
   #  resources :reset_password, only: %i[new create edit update]
   mount ActionCable.server => '/cable'
   root 'users#home_page'
-  get '/auth/google_oauth2/callback', to: 'sessions#omniauth'
+  get '/auth/:provider/callback', to: 'sessions#omniauth'
   post '/items/:id', to: 'admin#approved', as: 'submit'
   post '/items/:id/interested', to: 'notifications#interested', as: 'interested'
   post '/notifications/mark_read', to: 'notifications#mark_read'
