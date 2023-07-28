@@ -127,6 +127,7 @@ GEM
     globalid (1.1.0)
       activesupport (>= 5.0)
     hashie (5.0.0)
+    htmlbeautifier (1.4.2)
     i18n (1.14.1)
       concurrent-ruby (~> 1.0)
     image_processing (1.12.2)
@@ -380,6 +381,7 @@ DEPENDENCIES
   elasticsearch-model
   elasticsearch-rails
   factory_bot_rails (~> 6.0)
+  htmlbeautifier
   image_processing (~> 1.2)
   jbuilder (~> 2.7)
   jquery-rails

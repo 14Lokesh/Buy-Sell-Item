@@ -7,7 +7,7 @@ class CategoriesController < ApplicationController
   before_action :all_category, only: %i[index new]
   before_action :check_admin
   def index
-    @categories = Category.page(params[:page]).per(5)
+    @categories = Category.page(params[:page]).per(6)
   end
 
   def new

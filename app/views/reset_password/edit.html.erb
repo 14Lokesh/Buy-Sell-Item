@@ -1,0 +1,15 @@
+<h1 class="text-center">Reset Password</h1>
+<div class="container mx-auto w-50">
+  <%= form_with(model: @user, url: reset_password_path, method: :patch) do |form| %>
+    <%= form.hidden_field :reset_password_token %>
+    <div class="form-group my-3">
+      <%= form.label :password, class: "form-label required" %>
+      <%= form.password_field :password, placeholder: "Enter Your Password", class: "form-control",required: true %>
+    </div>
+    <div class="form-group my-3">
+      <%= form.label :password_confirmation, class: "form-label required" %>
+      <%= form.password_field :password_confirmation, placeholder: "Enter Your Password", class: "form-control",required: true %>
+    </div>
+    <%= form.submit "Reset Password", class: "btn btn-primary form-control button-design" %>
+  <% end %>
+</div>

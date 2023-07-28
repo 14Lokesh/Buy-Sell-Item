@@ -3,12 +3,14 @@
 # This is a sample class representing an Admin controller.
 class AdminController < ApplicationController
   before_action :check_admin
-  def new
-    @item = Item.new
-  end
 
   def index
     @fetched_data = Item.all
+    @fetched_data = Item.page(params[:page]).where(approved: false).per(6)
+  end
+
+  def new
+    @item = Item.new
   end
 
   def approved

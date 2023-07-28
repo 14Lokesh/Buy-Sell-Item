@@ -33,6 +33,7 @@ gem 'elasticsearch', '~>7.17.7'
 gem 'elasticsearch-model'
 gem 'elasticsearch-rails'
 gem 'factory_bot_rails', '~> 6.0'
+gem 'htmlbeautifier'
 gem 'jquery-rails'
 gem 'kaminari'
 gem 'koala'
@@ -44,6 +45,7 @@ gem 'pry'
 gem 'rspec-mocks', '~>3.12.5'
 gem 'rspec-rails', '~> 4.0'
 gem 'rubocop'
+# gem 'simplecov', require: false, group: :test
 
 # Use Active Storage variant
 gem 'image_processing', '~> 1.2'

@@ -36,6 +36,7 @@ class UsersController < ApplicationController
     @user = current_user
     @items = @user.items.where(approved: true)
     @item = Item.all
+    @user_items = current_user.items.where(approved: true)
   end
 
   def home_page; end

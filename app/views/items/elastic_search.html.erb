@@ -2,12 +2,9 @@
   <div class="container">
     <h4>Search Our Product</h4>
     <%= form_for :search_items, url: search_items_path, method: :get do |form| %>
-    
-      <%= form.text_field :query, value: params[:search_items].presence && params[:search_items][:query], placeholder: "Search Field" %>
-    
+      <%= form.text_field :query, value: params[:search_items].presence && params[:search_items][:query], placeholder: "Search Field",required: true %>
       <%= form.text_field :data, value: params[:search_items].presence && params[:search_items][:data], placeholder: "Filter on location/Category" %>
       <%= submit_tag 'Search' %>
-    
     <% end %>
   </div>
 <% end %>
@@ -19,3 +16,6 @@
     <%= render 'partials/product'%>
   <% end %>
 <% end %>
+<div class="text-center">
+  <%= paginate @item, class: 'pagination' %>
+</div>

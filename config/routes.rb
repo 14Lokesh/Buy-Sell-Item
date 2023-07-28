@@ -21,8 +21,9 @@ Rails.application.routes.draw do
     resources :messages, only: [:create]
   end
   resources :items do
-    resources :reviews, only: [:create]
+    resources :reviews, only: %i[create index]
   end
+  #  resources :reset_password, only: %i[new create edit update]
   mount ActionCable.server => '/cable'
   root 'users#home_page'
   get '/auth/google_oauth2/callback', to: 'sessions#omniauth'
@@ -34,5 +35,11 @@ Rails.application.routes.draw do
   get 'search_items', to: 'items#elastic_search', as: 'search_items'
   get 'profile', to: 'users#profile'
   get 'admin', to: 'admin#admin'
+  get 'user_item', to: 'items#user_item'
+  get 'user_pending_item', to: 'items#user_pending_item'
+  get 'reset_password/new', to: 'reset_password#new', as: :new_reset_password
+  post 'reset_password', to: 'reset_password#create'
+  get 'reset_password/edit/:reset_password_token', to: 'reset_password#edit', as: :edit_reset_password
+  patch 'reset_password', to: 'reset_password#update'
 end
 # rubocop:enable Metrics/BlockLength

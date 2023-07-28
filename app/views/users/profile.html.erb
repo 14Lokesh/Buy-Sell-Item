@@ -22,20 +22,10 @@
         <% end %>
       </div>
     </div>
-  <% else %>
-    <div class="card mt-4">
-      <div class="card-body">
-        <h3 class="card-title">Your Approved  Items:</h3>
-        <% if @items.any? %>
-          <ul class="list-group list-group-flush">
-            <% @items.each do |item| %>
-              <li class="list-group-item"><%= link_to item.title, item_path(item) %></li>
-            <% end %>
-          </ul>
-        <% else %>
-          <p class="card-text">No approved items found.</p>
-        <% end %>
-      </div>
+  <% else%>
+    <div class="text-center mt-5">
+      <%= link_to 'My Items', user_item_path,class: "btn btn-primary button-design"%>
+      <%= link_to 'My Pending Items', user_pending_item_path,class: "btn btn-primary button-design"%>
     </div>
-  </div>
-<% end %>
+  <%end%>
+</div>

@@ -11,6 +11,7 @@
           <%= form.label :password, class: 'required' %>
           <%= form.password_field :password, class: "form-control", placeholder: "password",required: true %>
         </div>
+        <%= link_to "Forgot Password?", new_reset_password_path %>
         <%= form.submit "Login", class: "mt-3 button-design form-control" %>
       <% end %>
     </div>

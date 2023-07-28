@@ -54,4 +54,18 @@ RSpec.describe Review, type: :model do
       expect(review.errors[:rating]).to include("must be less than or equal to 5")
     end
   end
+
+  describe 'associations' do
+    it 'belongs to a user' do
+      user = create(:user)
+      review = create(:review, user: user)
+      expect(review.user).to eq(user)
+    end
+
+    it 'belongs to an item' do
+      item = create(:item)
+      review = create(:review, item: item)
+      expect(review.item).to eq(item)
+    end
+  end
 end

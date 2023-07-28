@@ -18,7 +18,9 @@ RSpec.describe Notification, type: :model do
       expect(notification).not_to be_valid
       expect(notification.errors[:message]).to include("can't be blank")
     end
+  end
 
+  describe 'associations' do
     it 'is invalid without a user' do
       notification = build(:notification, user: nil)
       expect(notification).not_to be_valid

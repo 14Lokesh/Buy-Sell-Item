@@ -32,7 +32,9 @@ RSpec.describe Message, type: :model do
       expect(message).not_to be_valid
       expect(message.errors[:body]).to include("can't be blank")
     end
+  end
 
+  describe 'associations' do
     it 'is invalid without a conversation' do
       message = build(:message, conversation: nil, sender: sender, recipient: recipient)
       expect(message).not_to be_valid

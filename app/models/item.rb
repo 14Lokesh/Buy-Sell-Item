@@ -8,13 +8,18 @@ class Item < ApplicationRecord
   has_many :reviews, dependent: :destroy
   has_many_attached :images, dependent: :destroy
 
-  validates :images, content_type: ['image/png', 'image/jpeg', 'image/jpg']
+  validates :images, content_type: { in: ['image/png', 'image/jpeg', 'image/jpg'],
+                                     message: 'must be a PNG, JPG, or JPEG image' }
   validates :title, length: { maximum: 30 }, presence: true
   validates :description, length: { maximum: 100 }, presence: true
   validates :phone, presence: true, numericality: { only_integer: true, message: 'must be a valid phone number' },
                     length: { is: 10, message: 'must be 10 digits' },
                     format: { with: VALID_PHONE_REGEX, message: 'must be a valid phone number' }
   validates :username, :city, presence: true
+
+  scope :approved_and_not_items_owner, ->(user) { where(approved: true).where.not(user_id: user.id) }
+  scope :approved_by_user, ->(current_user) { where(user: current_user, approved: true) }
+  scope :unapproved_by_user, ->(current_user) { where(user: current_user, approved: false) }
 
   include Elasticsearch::Model
   include Elasticsearch::Model::Callbacks
