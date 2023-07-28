@@ -117,7 +117,7 @@ end
 
 item13 = Item.create(title: 'Laptop Adaptor', description: 'For HP Laptops', username: 'Jabra Ram', phone: '8756657656',
                      city: 'Jaipur', category_id: category3.id, approved: true, user_id: regular_user2.id, approved_by_id: admin.id)
-image_paths = ['laptop_charger.jpeg', 'laptop_charger2.jpg']
+image_paths = ['laptop_charger.jpeg', 'laptop_charger2.jpeg']
 image_paths.each do |image_path|
   path = Rails.root.join('app', 'assets', 'images', image_path)
   item13.images.attach(io: File.open(path), filename: image_path)
