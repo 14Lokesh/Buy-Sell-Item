@@ -2,7 +2,7 @@
 
 # This is a sample class representing an  Item controller.
 class ItemsController < ApplicationController
-  before_action :require_user_logged_in!, only: %i[show new]
+  before_action :require_user_logged_in!, only: %i[index show new]
   before_action :restrict_admin, only: %i[new create]
   def index
     @item = Item.all
