@@ -16,10 +16,10 @@
             <%= link_to 'Login', new_session_path, class: 'nav-link' %>
           </li>
         <% end %>
-        <li class="nav-item">
-          <%= link_to 'Products', items_path, class: 'nav-link' %>
-        </li>
         <% if Current.user %>
+          <li class="nav-item">
+            <%= link_to 'Products', items_path, class: 'nav-link' %>
+          </li>
           <% if Current.user && !Current.user.admin %>
             <li class="nav-item">
               <%= link_to 'Sell', new_item_path, class: 'nav-link' %>

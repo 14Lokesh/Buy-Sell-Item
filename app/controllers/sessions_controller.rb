@@ -32,10 +32,6 @@ class SessionsController < ApplicationController
     end
   end
 
-  def redirect_to_new_user
-    redirect_to new_user_path, flash: { notice: 'There was a problem' }
-  end
-
   def facebook_login
     auth = request.env['omniauth.auth']
     u_id = auth['uid']
