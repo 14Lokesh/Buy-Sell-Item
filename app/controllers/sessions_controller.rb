@@ -2,7 +2,6 @@
 
 # This is a sample class representing an  Session controller.
 class SessionsController < ApplicationController
-  include UsersHelper
   before_action :require_user_logged_in!, only: %i[mail_to_seller edit]
   def new; end
 
@@ -24,12 +23,10 @@ class SessionsController < ApplicationController
   end
 
   def omniauth
-    user = find_user_by_email(request.env['omniauth.auth']['info']['email'])
-    if user
-      log_in_and_redirect(user, 'Logged in successfully')
-    else
-      handle_new_user(request.env['omniauth.auth'])
-    end
+    user = User.from_omniauth(request.env['omniauth.auth'])
+    session[:user_id] = user.id
+    cookies.signed[:user_id] = user.id
+    redirect_to items_path, flash: { notice: 'Logged in successfully' }
   end
 
   def facebook_login
@@ -39,6 +36,21 @@ class SessionsController < ApplicationController
     user_email = auth['info']['email']
     user = User.find_by(uid: u_id)
     redirect_to_existing_user_or_create_new(user, u_id, user_name, user_email)
+  end
+
+  private
+
+  def authenticate_user(user)
+    user&.authenticate(params[:password])
+  end
+
+  def redirect_to_existing_user_or_create_new(user, u_id, user_name, user_email)
+    if user
+      redirect_to items_path(user)
+    else
+      User.create(uid: u_id, name: user_name, email: user_email)
+    end
+    redirect_to items_path, flash: { notice: 'Logged in successfully' }
   end
 
   def user_params

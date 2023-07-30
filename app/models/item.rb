@@ -2,6 +2,9 @@
 
 # This is a sample class representing an  Item Model.
 class Item < ApplicationRecord
+  include Elasticsearch::Model
+  include Elasticsearch::Model::Callbacks
+
   VALID_PHONE_REGEX = /\A\d{10}\z/
   belongs_to :category
   belongs_to :user
@@ -20,9 +23,7 @@ class Item < ApplicationRecord
   scope :approved_and_not_items_owner, ->(user) { where(approved: true).where.not(user_id: user.id) }
   scope :approved_by_user, ->(current_user) { where(user: current_user, approved: true) }
   scope :unapproved_by_user, ->(current_user) { where(user: current_user, approved: false) }
-
-  include Elasticsearch::Model
-  include Elasticsearch::Model::Callbacks
+  scope :approved_items, -> { where(approved: true) }
 
   def self.index_data
     __elasticsearch__.create_index! force: true
@@ -53,8 +54,7 @@ class Item < ApplicationRecord
   end
   # rubocop:enable  Style/HashSyntax
 
-  # rubocop: disable Metrics/AbcSize
-  # rubocop: disable Metrics/MethodLength
+  # rubocop: disable Metrics/AbcSize, Metrics/MethodLength
   def self.search_items(query, data)
     search_definition = {
       query: {
@@ -93,5 +93,4 @@ class Item < ApplicationRecord
   end
   index_data
 end
-# rubocop: enable Metrics/AbcSize
-# rubocop: enable Metrics/MethodLength
+# rubocop: enable Metrics/AbcSize, Metrics/MethodLength

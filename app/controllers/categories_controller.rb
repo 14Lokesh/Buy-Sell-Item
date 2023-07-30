@@ -17,7 +17,7 @@ class CategoriesController < ApplicationController
   def create
     @category = Category.new(category_params)
     if @category.save
-      redirect_to categories_path, flash: { notice: 'Category has been added' }
+      redirect_to admin_categories_path, flash: { notice: 'Category has been added' }
     else
       @categories = Category.all
       render :new
@@ -28,7 +28,7 @@ class CategoriesController < ApplicationController
 
   def update
     if @category.update(category_params)
-      redirect_to categories_path, flash: { notice: 'Category was successfully updated' }
+      redirect_to admin_categories_path, flash: { notice: 'Category was successfully updated' }
     else
       render :edit
     end
@@ -36,8 +36,10 @@ class CategoriesController < ApplicationController
 
   def destroy
     @category.destroy
-    redirect_to categories_path, flash: { notice: 'Category was successfully deleted.' }
+    redirect_to admin_categories_path, flash: { notice: 'Category was successfully deleted.' }
   end
+
+  private
 
   def add_category
     @category = Category.find(params[:id])
@@ -46,8 +48,6 @@ class CategoriesController < ApplicationController
   def all_category
     @categories = Category.all
   end
-
-  private
 
   def category_params
     params.require(:category).permit(:name)

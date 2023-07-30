@@ -1,5 +1,4 @@
-# frozen_string_literal: true
-
+#rubocop: disable all
 require 'rails_helper'
 
 RSpec.describe Notification, type: :model do
@@ -25,6 +24,16 @@ RSpec.describe Notification, type: :model do
       notification = build(:notification, user: nil)
       expect(notification).not_to be_valid
       expect(notification.errors[:user]).to include('must exist')
+    end
+  end
+
+  describe '.mark_as_read' do
+    it 'marks all notifications as read for the given user' do
+      create_list(:notification, 5, user: users, read: false)
+
+      expect{
+        Notification.mark_as_read(users)
+      }.to change { Notification.where(read: false, user_id: users.id).count }.from(5).to(0)
     end
   end
 end

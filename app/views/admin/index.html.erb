@@ -1,47 +1,6 @@
-<div class='container'>
-  <h2 class="text-center mb-4 mt-4">Hello Admin, Approve these posts or reject</h2>
-  <div class="container-fluid">
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
-      <% has_items = false %>
-      <% @fetched_data.each do |data| %>
-        <% if data.approved == false %>
-          <% has_items = true %>
-          <div class="col mb-4">
-            <div class="card my-card">
-              <% if data.images.attached? %>
-                <%= image_tag data.images.first, class: "card-img-top approval-page" %>
-              <% else %>
-                <div class="card-body">
-                  <p class="card-text">No image available.</p>
-                </div>
-              <% end %>
-              <div class="card-body">
-                <h5 class="card-title"><strong>Ad Title:</strong> <%= data.title %></h5>
-                <p class="card-text"><strong>Ad Description:</strong> <%= data.description %></p>
-                <p class="card-text"><strong>Seller name:</strong> <%= data.username %></p>
-                <p class="card-text"><strong>Phone:</strong> <%= data.phone %></p>
-                <p class="card-text"><strong>City:</strong> <%= data.city %></p>
-                <p class="card-text"><strong>Category:</strong> <%= data.category.name %></p>
-              </div>
-              <div class="d-flex justify-content-between card-body">
-                <%= button_to "Approve", submit_path(data), method: :post, class: "btn btn-primary" %>
-                <%= button_to "Reject", admin_path(data), method: :delete, class: "btn btn-danger", data: { confirm: 'Are you sure you want to delete this item?' } %>
-              </div>
-              <div class="text-center">
-                <%= link_to 'View More', product_path(data), class: "btn btn-primary button-design" %>
-              </div>
-            </div>
-          </div>
-        <% end %>
-      <% end %>
-      <% unless has_items %>
-        <div class="text-center mb-4 mt-4">
-          <h4> No items available</h4>
-        </div>
-      <% end %>
-    </div>
+<div class="d-flex justify-content-center align-items-center admin_page">
+  <div>
+    <%= link_to "Add Category", new_admin_category_path(current_user), class: 'button-design btn btn-info ' %>
+    <%= link_to "Pending Post", approval_page_admin_index_path, class: 'button-design btn btn-info' %>
   </div>
-</div>
-<div class="text-center">
-  <%= paginate @fetched_data, class: 'pagination' %>
 </div>

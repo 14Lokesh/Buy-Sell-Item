@@ -12,4 +12,8 @@ module ApplicationHelper
 
     object.errors.messages[field_name].join(', ')
   end
+
+  def unread_notifications
+    current_user.notifications.where(read: false)
+  end
 end

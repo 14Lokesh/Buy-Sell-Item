@@ -2,7 +2,6 @@
 
 # This is a sample class representing an  Message controller.
 class MessagesController < ApplicationController
-  include MessagesHelper
   def create
     @conversation = Conversation.find(params[:conversation_id])
     @message = @conversation.messages.build(message_params)
@@ -16,6 +15,13 @@ class MessagesController < ApplicationController
   end
 
   private
+
+  def broadcast_message
+    ActionCable.server.broadcast("chat_#{@conversation.id}", {
+                                   sender: @message.sender.email,
+                                   message: @message.body
+                                 })
+  end
 
   def message_params
     params.require(:message).permit(:body)

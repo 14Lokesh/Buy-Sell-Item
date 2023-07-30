@@ -1,6 +1,6 @@
 <div class="container">
-  <div id="messages">
-    <h1 class="text-center">Chat with <%= @conversation.opposed_user(current_user).username %></h1>
+  <h1 class="text-center">Chat with <%= @conversation.opposed_user(current_user).username %></h1>
+  <div id="messages" class="messages-container">
     <% @conversation.messages.each do |message| %>
       <div class="message">
         <p><strong><%= message.sender.email %>:</strong> <%= message.body %></p>
@@ -16,6 +16,7 @@
         </div>
       </div>
     <% end %>
+    <div id="last-message"></div>
   </div>
 </div>
 <div id="conversation" data-conversation-id="<%= @conversation.id %>"></div>

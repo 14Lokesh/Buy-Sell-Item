@@ -2,7 +2,6 @@
 
 # This is a sample class representing an Reset Password controller.
 class ResetPasswordController < ApplicationController
-  include ResetPasswordHelper
   def new; end
 
   def create
@@ -17,12 +16,9 @@ class ResetPasswordController < ApplicationController
 
   def edit
     @user = User.find_by(reset_password_token: params[:reset_password_token])
+    return if @user&.password_reset_token_valid?
 
-    if @user&.password_reset_token_valid?
-      # redirect to password reset form
-    else
-      redirect_to root_path, flash: { notice: 'Password reset link has expired or is invalid.' }
-    end
+    redirect_to root_path, flash: { notice: 'Password reset link has expired or is invalid.' }
   end
 
   def update
@@ -48,6 +44,13 @@ class ResetPasswordController < ApplicationController
   end
 
   private
+
+  def reset_password_and_send_email(user)
+    user.generate_reset_password_token
+    user.save
+    UserMailer.password_reset_instructions(user).deliver_later
+    redirect_to new_session_path, flash: { notice: 'Password reset instructions sent to your email.' }
+  end
 
   def user_params
     params.require(:user).permit(:password, :password_confirmation)

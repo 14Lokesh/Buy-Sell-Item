@@ -3,6 +3,7 @@
 # This is a sample class representing an  User controller.
 class UsersController < ApplicationController
   before_action :require_user_logged_in!, only: [:edit]
+  before_action :find_user, only: %i[edit update]
   def new
     @user = User.new
   end
@@ -12,18 +13,15 @@ class UsersController < ApplicationController
     if @user.save
       session[:user_id] = @user.id
       cookies.signed[:user_id] = @user.id
-      redirect_to items_path
+      redirect_to items_path, flash: { notice: 'Signed Up Successfully' }
     else
       render :new
     end
   end
 
-  def edit
-    @user = User.find(params[:id])
-  end
+  def edit; end
 
   def update
-    @user = User.find(params[:id])
     if user_params[:email].blank?
       render :edit
     else
@@ -42,6 +40,10 @@ class UsersController < ApplicationController
   def home_page; end
 
   private
+
+  def find_user
+    @user = User.find(params[:id])
+  end
 
   def user_params
     params.require(:user).permit(:username, :email, :password, :password_confirmation)

@@ -28,4 +28,14 @@ class User < ApplicationRecord
   def password_reset_token_valid?
     reset_password_token_expires_at.present? && reset_password_token_expires_at > Time.now
   end
+
+  def self.from_omniauth(auth)
+    user = find_by(email: auth.info.email)
+    user ||= User.create(
+      username: auth.info.name,
+      email: auth.info.email,
+      password: SecureRandom.alphanumeric(10)
+    )
+    user
+  end
 end

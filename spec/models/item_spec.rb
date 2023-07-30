@@ -86,7 +86,8 @@ RSpec.describe Item, type: :model do
 
   describe 'scopes' do
     let!(:user) { create(:user) }
-
+    let!(:approved_item) { create(:item, approved: true) }
+    let!(:unapproved_item) { create(:item, approved: false) }
     before do
       create_list(:item, 3, approved: true, user: user)
       create_list(:item, 2, approved: false, user: user)
@@ -115,6 +116,13 @@ RSpec.describe Item, type: :model do
         unapproved_items = Item.unapproved_by_user(user)
 
         expect(unapproved_items).to match_array(user.items.where(approved: false))
+      end
+    end
+
+    describe '.approved_items' do
+      it 'returns only approved items' do
+        expect(Item.approved_items).to include(approved_item)
+        expect(Item.approved_items).not_to include(unapproved_item)
       end
     end
   end

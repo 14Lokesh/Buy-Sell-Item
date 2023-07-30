@@ -3,11 +3,7 @@
 # This is a sample class representing an Admin controller.
 class AdminController < ApplicationController
   before_action :check_admin
-
-  def index
-    @fetched_data = Item.all
-    @fetched_data = Item.page(params[:page]).where(approved: false).per(6)
-  end
+  def index; end
 
   def new
     @item = Item.new
@@ -25,8 +21,10 @@ class AdminController < ApplicationController
   def destroy
     @item = Item.find(params[:id])
     @item.destroy
-    redirect_to admin_index_path, flash: { notice: 'Item Deleted successfully' }
+    redirect_to approval_page_admin_index_path, flash: { notice: 'Item Deleted successfully' }
   end
 
-  def admin; end
+  def approval_page
+    @items = Item.page(params[:page]).where(approved: false).per(6)
+  end
 end

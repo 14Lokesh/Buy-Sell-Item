@@ -1,32 +1,78 @@
-<div class="container-fluid">
-  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
-    <% @item.each do |item| %>
-      <% if item.approved && item.user != current_user %>
-        <div class="col mb-4">
-          <div class="card" style="width: 18rem;">
-            <% if item.images.attached? %>
-              <%= image_tag url_for(item.images.first), class: "card-img-top" %>
-            <% else %>
-              <p class="text-center">No image available.</p>
-            <% end %>
-            <div class="card-body">
-              <h5 class="card-title"><%= item.title %></h5>
-              <p class="card-text"><%= item.description %></p>
-              <p><strong>Category:</strong> <%=item.category.name%></p>
-              <p><strong>City:</strong> <%= item.city %></p>
-              <% if !Current.user&.admin%>
-                <div class="text-center" >
-                  <%= button_to 'Interested', interested_path(item), method: :post, class: "btn btn-primary button-design" %>
-                </div>
-              <%else%>
-                <div class="text-center">
-                  <%= link_to 'View More', product_path(item), class: "btn btn-primary button-design" %>
-                </div>
-              <%end%>
+<% if @items.any? %>
+  <div class="container-fluid">
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
+      <% @items.each do |item| %>
+        <% if item.user != current_user %>
+          <div class="col mb-4">
+            <div class="card" >
+              <% if item.images.attached? %>
+                <%= image_tag url_for(item.images.first), class: "card-img-top" %>
+              <% else %>
+                <p class="text-center">No image available.</p>
+              <% end %>
+              <div class="card-body">
+                <h5 class="card-title"><%= item.title %></h5>
+                <p class="card-text">
+                  <strong>Description:</strong>
+                  <% if item.description.length > 15 %>
+                    <%= item.description[0, 15] + '....' %>
+                  <% else %>
+                    <%= item.description %>
+                  <% end %>
+                </p>
+                <p><strong>Category:</strong> <%= item.category.name %></p>
+                <p><strong>City:</strong> <%= item.city %></p>
+                <% if Current.user&.admin && item.approved == false%>
+                  <div class="d-flex justify-content-between card-body">
+                    <%= button_to "Approve", submit_path(item), method: :post, class: "btn button-design" %>
+                    <%= button_to "Reject", admin_path(item), method: :delete, class: "btn button-design", data: { confirm: 'Are you sure you want to delete this item?' } %>
+                  </div>
+                <%end%>
+                <% if !Current.user&.admin %>
+                  <div class="text-center">
+                    <%= button_to 'Interested', interested_path(item), method: :post, class: "btn btn-primary button-design btn-info" %>
+                  </div>
+                <% else %>
+                  <div class="text-center">
+                    <%= link_to 'View More', product_path(item), class: "btn btn-primary button-design btn-info" %>
+                  </div>
+                <% end %>
+              </div>
             </div>
           </div>
-        </div>
+        <% end %>
       <% end %>
-    <% end %>
+      <% @items.each do |item| %>
+        <% if item.user == current_user %>
+          <div class="col mb-4">
+            <div class="card" style="width: 18rem;">
+              <% if item.images.attached? %>
+                <%= image_tag url_for(item.images.first), class: "card-img-top" %>
+              <% else %>
+                <p class="text-center">No image available.</p>
+              <% end %>
+              <div class="card-body">
+                <h5 class="card-title"><%= item.title %></h5>
+                <p class="card-text">
+                  <strong>Description:</strong>
+                  <% if item.description.length > 15 %>
+                    <%= item.description[0, 15] + '....' %>
+                  <% else %>
+                    <%= item.description %>
+                  <% end %>
+                </p>
+                <p><strong>Category:</strong> <%= item.category.name %></p>
+                <p><strong>City:</strong> <%= item.city %></p>
+                <div class="text-center">
+                  <%= link_to 'View More', product_path(item), class: "btn btn-primary button-design btn-info" %>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
   </div>
-</div>
+<% else %>
+  <p class="text-center">No items found.</p>
+<% end %>

@@ -1,0 +1,7 @@
+<div class='container'>
+  <h2 class="text-center mb-4 mt-4">Hello Admin, Approve these posts or reject</h2>
+  <%= render 'partials/product'%>
+</div>
+<div class="text-center">
+  <%= paginate @items, class: 'pagination' %>
+</div>

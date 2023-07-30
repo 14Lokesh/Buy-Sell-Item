@@ -108,4 +108,41 @@ RSpec.describe User, type: :model do
       expect(user.password_reset_token_valid?).to eq(false)
     end
   end
+
+  describe '.from_omniauth' do
+    let(:auth) do
+      OmniAuth::AuthHash.new(
+        provider: 'provider_name',
+        uid: '123456',
+        info: {
+          name: 'Lokesh',
+          email: 'lokesh@example.com'
+        }
+      )
+    end
+
+    context 'when user already exists' do
+      it 'returns the existing user' do
+        existing_user = User.create(username: 'Lokesh', email: 'lokesh@example.com')
+        user = User.from_omniauth(auth)
+        expect(user.username).to eq(existing_user.username)
+        expect(user.email).to eq(existing_user.email)
+      end
+    end
+
+    context 'when user does not exist' do
+      it 'creates a new user' do
+        user = User.from_omniauth(auth)
+        expect(user.username).to eq('Lokesh')
+        expect(user.email).to eq('lokesh@example.com')
+        expect(user).to be_a(User)
+        expect(user).to be_persisted
+      end
+
+      it 'generates a random password for the new user' do
+        user = User.from_omniauth(auth)
+        expect(user.authenticate('invalid_password')).to be_falsey
+      end
+    end
+  end
 end

@@ -3,12 +3,10 @@
 # This is a sample class representing an  Password controller.
 class PasswordsController < ApplicationController
   before_action :require_user_logged_in!
-  def edit
-    @user = User.find(params[:id])
-  end
+  before_action :find_user, only: %i[edit update]
+  def edit; end
 
   def update
-    @user = User.find(params[:id])
     if user_params[:password].blank?
       render :edit
     else
@@ -18,6 +16,10 @@ class PasswordsController < ApplicationController
   end
 
   private
+
+  def find_user
+    @user = User.find(params[:id])
+  end
 
   def user_params
     params.require(:user).permit(:password, :password_confirmation)

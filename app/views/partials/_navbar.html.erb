@@ -39,10 +39,10 @@
           <%end%>
           <% if Current.user.admin %>
             <li class="nav-item">
-              <%= link_to "Pending Post", admin_index_path, class: "nav-link" %>
+              <%= link_to "Pending Post", approval_page_admin_index_path, class: "nav-link" %>
             </li>
             <li class="nav-item">
-              <%= link_to "Add Category", new_category_path, class: "nav-link" %>
+              <%= link_to "Add Category", new_admin_category_path(current_user), class: "nav-link" %>
             </li>
           <%end%>
           <li class="nav-item">
@@ -91,7 +91,7 @@
           <% if current_user %>
             <%= button_to "Mark All as Read",  notifications_mark_read_path,method: :post, class: "btn btn-primary", id: "mark-read-button" %>
             <div id="notifications-container">
-              <% current_user.notifications.where(read: false).each do |notification| %>
+              <% unread_notifications.each do |notification| %>
                 <div class="notification-item"><%= notification.message %></div>
               <% end %>
             </div>
@@ -113,7 +113,7 @@
           <div class="modal-body">
             <ul class="list-group">
               <li class="list-group-item">
-                <%= link_to "Profile", profile_path, class: "btn btn-link text-decoration-none text-reset" %>
+                <%= link_to "Profile", profile_users_path, class: "btn btn-link text-decoration-none text-reset" %>
               </li>
               <li class="list-group-item">
                 <%= link_to "Change Email", edit_user_path(current_user), class: "btn btn-link text-decoration-none text-reset" %>

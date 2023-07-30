@@ -3,7 +3,7 @@
   <div class="list-group">
     <% has_message = false %>
     <% @conversations.each do |conversation| %>
-      <% if conversation.opposed_user(current_user).email.present? %>
+      <% if conversation.opposed_user(current_user) %>
         <% has_message = true %>
         <strong>Chat With: </strong> <%= link_to conversation.opposed_user(current_user).email+'('+conversation.messages.unread_from_sender(current_user).count.to_s+')', conversation, class: 'list-group-item list-group-item-action mb-2 text-decoration-none text-primary', style: 'width: 300px;' %>
       <% end %>

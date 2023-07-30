@@ -4,6 +4,11 @@
 class ApplicationController < ActionController::Base
   before_action :set_current_user
   helper_method :current_admin
+  rescue_from ActiveRecord::RecordNotFound, with: :not_found_method
+
+  def not_found_method
+    render file: Rails.public_path.join('404.html'), status: :not_found, layout: false
+  end
 
   def set_current_user
     Current.user = User.find_by(id: session[:user_id]) if session[:user_id]
