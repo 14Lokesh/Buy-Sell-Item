@@ -99,7 +99,7 @@ RSpec.describe Item, type: :model do
         other_user_item = create(:item, approved: true, user: other_user)
 
         expect(Item.approved_and_not_items_owner(user)).to include(other_user_item)
-        expect(Item.approved_and_not_items_owner(user)).not_to include(*user.items)
+        expect(Item.approved_and_not_items_owner(user)).not_to include(user.items)
       end
     end
 

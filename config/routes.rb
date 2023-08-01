@@ -14,7 +14,7 @@ Rails.application.routes.draw do
     collection do
       get :approval_page
     end
-    resources :categories do
+    resources :categories, except: [:show] do
       get '/page/:page', action: :index, on: :collection
     end
   end

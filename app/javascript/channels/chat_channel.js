@@ -4,7 +4,6 @@ document.addEventListener('turbolinks:load', () => {
   const messageInput = document.getElementById('message_body');
   const messagesContainer = document.getElementById('messages');
   const messageForm=document.getElementById('form')
-  const lastMessage = document.getElementById('last-message');
   if (messageForm) {
     console.log('form')
     messageForm.addEventListener('submit', (event) => {
@@ -41,7 +40,7 @@ document.addEventListener('turbolinks:load', () => {
           
           const submitButton = document.querySelector("#message_submit")
           submitButton.disabled = false
-          messagesContainer.scrollTop = lastMessage.offsetTop;
+          messagesContainer.scrollTop = messagesContainer.scrollHeight;
 
         },
         speak: function (message) {

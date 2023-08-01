@@ -50,6 +50,16 @@ class ItemsController < ApplicationController
     @items = Item.approved_items.page(params[:page]).per(6)
   end
 
+  def destroy
+    @item = Item.find(params[:id])
+    if @item.user == current_user
+      @item.destroy
+      redirect_to user_item_path, flash: { notice: 'Item was successfully deleted.' }
+    else
+      redirect_to user_item_path, flash: { notice: 'You are not authorized to delete this item.' }
+    end
+  end
+
   private
 
   def item
