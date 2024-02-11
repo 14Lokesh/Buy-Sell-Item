@@ -3,7 +3,7 @@
 # This is a sample class representing an  Message controller.
 class MessagesController < ApplicationController
   def create
-    @conversation = Conversation.find(params[:conversation_id])
+    @conversation = Conversation.includes(:sender).find(params[:conversation_id])
     @message = @conversation.messages.build(message_params)
     @message.sender = current_user
     @message.recipient = @conversation.opposed_user(current_user)

@@ -43,9 +43,9 @@ document.addEventListener('turbolinks:load', () => {
           messagesContainer.scrollTop = messagesContainer.scrollHeight;
 
         },
-        speak: function (message) {
-          return this.perform('receive', { conversation_id: conversationId, message: message });
-        }
+        // speak: function (message) {
+        //   return this.perform('receive', { conversation_id: conversationId, message: message });
+        // }
       }
     );
 });

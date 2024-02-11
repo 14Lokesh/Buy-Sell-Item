@@ -28,6 +28,7 @@ gem 'jbuilder', '~> 2.7'
 gem 'actioncable'
 gem 'active_storage_validations'
 gem 'bcrypt', '~> 3.1.7'
+gem 'bullet', group: :development
 gem 'dotenv-rails'
 gem 'elasticsearch', '~>7.17.7'
 gem 'elasticsearch-model'

@@ -6,7 +6,7 @@ class ItemsController < ApplicationController
   before_action :restrict_admin, only: %i[new create]
   before_action :item, only: %i[index all_items]
   def index
-    @items = Item.approved_and_not_items_owner(current_user).page(params[:page]).per(6)
+    @items = Item.includes(:category, :user, images_attachments: :blob).approved_and_not_items_owner(current_user).page(params[:page]).per(6)
   end
 
   def new
@@ -30,12 +30,12 @@ class ItemsController < ApplicationController
   end
 
   def user_item
-    @items = Item.approved_by_user(current_user)
+    @items = Item.includes(:category, :user).approved_by_user(current_user)
     @items = @items.page(params[:page]).per(6)
   end
 
   def user_pending_item
-    @items = Item.unapproved_by_user(current_user)
+    @items = Item.includes(:category, :user).unapproved_by_user(current_user)
     @items = @items.page(params[:page]).per(6)
   end
 
@@ -47,7 +47,7 @@ class ItemsController < ApplicationController
   end
 
   def all_items
-    @items = Item.approved_items.page(params[:page]).per(6)
+    @items = Item.includes(:category, :user).approved_items.page(params[:page]).per(6)
   end
 
   def destroy
@@ -63,7 +63,7 @@ class ItemsController < ApplicationController
   private
 
   def item
-    @item = Item.all
+    @item = Item.includes(:category, :user).all
   end
 
   def item_params

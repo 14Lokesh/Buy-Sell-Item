@@ -39,8 +39,7 @@ class Item < ApplicationRecord
       indexes :name, type: :text
     end
   end
-
-  # rubocop:disable  Style/HashSyntax
+  # rubocop: disable Style/HashSyntax
   def as_indexed_json(_options = {})
     {
       id: id,
@@ -52,8 +51,8 @@ class Item < ApplicationRecord
       name: category&.name
     }
   end
-  # rubocop:enable  Style/HashSyntax
 
+  # rubocop: enable Style/HashSyntax
   # rubocop: disable Metrics/AbcSize, Metrics/MethodLength
   def self.search_items(query, data)
     search_definition = {
